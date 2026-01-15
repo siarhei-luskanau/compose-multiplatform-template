@@ -1,6 +1,15 @@
-rootProject.name = "PixabayEye"
+rootProject.name = "compose-multiplatform-template"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(
+    ":app:androidApp",
+    ":composeApp",
+    ":core:coreCommon",
+    ":core:corePref",
+    ":navigation",
+    ":ui:uiCommon",
+    ":ui:uiMain",
+    ":ui:uiSplash",
 )
 
 pluginManagement {

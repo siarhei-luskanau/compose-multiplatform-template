@@ -11,11 +11,21 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(libs.versions.build.jvmTarget.get().toInt())
+    jvmToolchain(
+        libs.versions.build.jvmTarget
+            .get()
+            .toInt(),
+    )
 
     androidLibrary {
-        compileSdk = libs.versions.build.android.compileSdk.get().toInt()
-        minSdk = libs.versions.build.android.minSdk.get().toInt()
+        compileSdk =
+            libs.versions.build.android.compileSdk
+                .get()
+                .toInt()
+        minSdk =
+            libs.versions.build.android.minSdk
+                .get()
+                .toInt()
         androidResources.enable = true
         withHostTestBuilder {}.configure {
             isIncludeAndroidResources = true
@@ -34,8 +44,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.coil.compose)
-            implementation(libs.coil.network.ktor3)
             implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.animation.graphics)
             implementation(libs.jetbrains.compose.components.resources)
@@ -50,7 +58,6 @@ kotlin {
             implementation(libs.jetbrains.window.core)
             implementation(libs.koin.compose)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(project.dependencies.platform(libs.coil.bom))
             implementation(project.dependencies.platform(libs.koin.bom))
         }
 
@@ -66,10 +73,6 @@ kotlin {
             dependencies {
                 implementation(libs.androidx.uitest.junit4)
                 implementation(libs.androidx.uitest.testManifest)
-                implementation(libs.robolectric)
-                implementation(libs.roborazzi)
-                implementation(libs.roborazzi.compose)
-                implementation(libs.roborazzi.rule)
             }
         }
 
