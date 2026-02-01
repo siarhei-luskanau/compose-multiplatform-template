@@ -30,7 +30,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      - uses: gradle/actions/setup-gradle@49ec880f92204d92aac59e81f28195de48b4a7fa #
+      - uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
 
       - run: ./gradlew ktlintFormat --stacktrace
       - uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
@@ -84,7 +84,7 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
 
-      - uses: gradle/actions/setup-gradle@49ec880f92204d92aac59e81f28195de48b4a7fa #
+      - uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
 
       - run: ./gradlew clean ${{ matrix.gradle-tasks }} --stacktrace
 
@@ -113,7 +113,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      - uses: gradle/actions/setup-gradle@49ec880f92204d92aac59e81f28195de48b4a7fa #
+      - uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
 
       - run: ./gradlew assembleDebug assembleRelease --stacktrace
 
@@ -130,7 +130,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      - uses: gradle/actions/setup-gradle@49ec880f92204d92aac59e81f28195de48b4a7fa #
+      - uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
 
       - run: ./gradlew :app:desktopApp:jar --stacktrace
 
@@ -147,7 +147,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      - uses: gradle/actions/setup-gradle@49ec880f92204d92aac59e81f28195de48b4a7fa #
+      - uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
 
       - run: ./gradlew :app:webApp:jsMainClasses --stacktrace
       - run: ./gradlew :app:webApp:wasmJsMainClasses --stacktrace
@@ -166,6 +166,6 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      - uses: gradle/actions/setup-gradle@49ec880f92204d92aac59e81f28195de48b4a7fa #
+      - uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
 
       - run: ./gradlew ciIos --stacktrace
