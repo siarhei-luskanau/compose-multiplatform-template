@@ -96,6 +96,10 @@ kotlin {
         }
 }
 
+tasks.withType<Test>().matching { it.name.contains("AndroidHostTest") }.configureEach {
+    exclude("**/*CommonTest*")
+}
+
 tasks.withType<AbstractTestTask>().configureEach {
     failOnNoDiscoveredTests = false
 }
