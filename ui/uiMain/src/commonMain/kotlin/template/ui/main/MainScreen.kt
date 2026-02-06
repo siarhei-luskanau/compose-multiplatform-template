@@ -10,13 +10,16 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import template.ui.common.resources.Res
 import template.ui.common.resources.back_button
 import template.ui.common.resources.ic_arrow_back
+import template.ui.common.theme.AppTheme
 
 @Composable
 fun MainScreen(viewModelProvider: () -> MainViewModel) {
@@ -61,3 +64,13 @@ internal fun MainContent(
         )
     }
 }
+
+@Preview
+@Composable
+internal fun MainScreenPreview() =
+    AppTheme {
+        MainContent(
+            viewStateFlow = MutableStateFlow(MainViewState.Success("Preview")),
+            onEvent = {},
+        )
+    }

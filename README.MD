@@ -34,3 +34,6 @@ Run browser UI tests: `./gradlew :app:webApp:wasmJsBrowserTest`
 ### Code style and linting
 - launch ktlintFormat: `./gradlew ktlintFormat`
 - launch ktlint, detekt and lint checks: `./gradlew ktlintCheck detekt lint`
+
+### Screenshot Testing
+Record a screenshot: `./gradlew recordRoborazzi`
