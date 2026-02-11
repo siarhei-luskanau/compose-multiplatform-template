@@ -20,6 +20,30 @@ allprojects {
     }
 }
 
+tasks.register("ciVerifyScreenshotJobsMatrixSetup") {
+    val matrixJson = getScreenshotMatrixJson(rootProject = rootProject, roborazziTask = "verifyRoborazzi")
+    val outputFile = layout.buildDirectory.file("verify_screenshot_jobs_matrix.json")
+    doLast {
+        outputFile.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText(matrixJson)
+        }
+        println("screenshot_jobs_matrix: $matrixJson")
+    }
+}
+
+tasks.register("ciRecordScreenshotJobsMatrixSetup") {
+    val matrixJson = getScreenshotMatrixJson(rootProject = rootProject, roborazziTask = "recordRoborazzi")
+    val outputFile = layout.buildDirectory.file("record_screenshot_jobs_matrix.json")
+    doLast {
+        outputFile.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText(matrixJson)
+        }
+        println("record_screenshot_jobs_matrix: $matrixJson")
+    }
+}
+
 tasks.register("ciIos") {
     val injected = project.objects.newInstance<Injected>()
     doLast {

@@ -45,4 +45,4 @@ kotlin {
 }
 
 // Directory for reference images
-roborazzi.outputDir.set(rootProject.file("screenshots"))
+roborazzi.outputDir.set(file("src/screenshots"))
