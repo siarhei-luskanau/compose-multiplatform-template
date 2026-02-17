@@ -229,8 +229,8 @@ ui/uiFeature/
 class FeatureViewModel(
     private val navigationCallback: FeatureNavigationCallback,
 ) : ViewModel() {
-    private val _viewState = MutableStateFlow<FeatureViewState>(FeatureViewState.Loading)
-    val viewState: StateFlow<FeatureViewState> = _viewState.asStateFlow()
+    val viewState: StateFlow<FeatureViewState>
+        field = MutableStateFlow<FeatureViewState>(FeatureViewState.Loading)
 
     fun onEvent(event: FeatureViewEvent) { ... }
 }

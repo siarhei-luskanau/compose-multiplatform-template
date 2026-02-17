@@ -17,6 +17,10 @@ kotlin {
             .toInt(),
     )
 
+    compilerOptions {
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    }
+
     androidLibrary {
         compileSdk =
             libs.versions.build.android.compileSdk
