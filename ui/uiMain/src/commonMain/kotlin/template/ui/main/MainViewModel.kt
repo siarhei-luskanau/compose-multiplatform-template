@@ -4,24 +4,38 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.InjectedParam
+import org.koin.core.annotation.Provided
+import template.core.common.DispatcherSet
+import template.core.pref.PrefService
 
+@Factory
 class MainViewModel(
-    private val initArg: String,
-    private val navigationCallback: MainNavigationCallback,
+    @InjectedParam private val initArg: String,
+    @InjectedParam private val navigationCallback: MainNavigationCallback,
+    @Provided private val dispatcherSet: DispatcherSet,
+    @Provided private val prefService: PrefService,
 ) : ViewModel() {
     val viewState: StateFlow<MainViewState>
         field = MutableStateFlow<MainViewState>(MainViewState.Loading)
 
     init {
-        viewModelScope.launch {
-            viewState.value = MainViewState.Success(data = initArg)
+        viewModelScope.launch(dispatcherSet.defaultDispatcher()) {
+            prefService.getKey().collect { pref ->
+                viewState.value = MainViewState.Success(data = "initArg=$initArg pref=$pref")
+            }
         }
     }
 
     fun onEvent(event: MainViewEvent) {
-        when (event) {
-            MainViewEvent.NavigateBack -> viewModelScope.launch { navigationCallback.goBack() }
+        viewModelScope.launch {
+            when (event) {
+                MainViewEvent.NavigateBack -> viewModelScope.launch { navigationCallback.goBack() }
+            }
         }
     }
 }
