@@ -49,7 +49,7 @@ jobs:
       matrix:
         gradle-tasks: [
           "jvmTest",
-          # "testAndroidHostTest",
+          "testAndroidHostTest",
           "wasmJsBrowserTest",
         ]
         os: [ ubuntu-latest ]

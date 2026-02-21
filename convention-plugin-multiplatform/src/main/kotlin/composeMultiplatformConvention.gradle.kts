@@ -5,8 +5,9 @@ val libs = the<LibrariesForLibs>()
 
 plugins {
     id("com.android.kotlin.multiplatform.library")
-    kotlin("multiplatform")
+    id("io.insert-koin.compiler.plugin")
     id("org.jetbrains.compose")
+    kotlin("multiplatform")
     kotlin("plugin.compose")
 }
 
@@ -69,6 +70,7 @@ kotlin {
             implementation(libs.jetbrains.lifecycle.viewmodel.navigation3)
             implementation(libs.jetbrains.savedstate.compose)
             implementation(libs.jetbrains.window.core)
+            implementation(libs.koin.annotations)
             implementation(libs.koin.compose)
             implementation(libs.kotlinx.coroutines.core)
             implementation(project.dependencies.platform(libs.koin.bom))

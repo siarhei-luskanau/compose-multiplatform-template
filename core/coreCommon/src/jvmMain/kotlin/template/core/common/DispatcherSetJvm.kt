@@ -1,7 +1,9 @@
 package template.core.common
 
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.annotation.Single
 
+@Single
 internal class DispatcherSetJvm : DispatcherSet {
     override fun defaultDispatcher() = Dispatchers.Default
 
