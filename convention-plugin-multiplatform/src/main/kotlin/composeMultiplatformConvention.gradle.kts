@@ -35,6 +35,15 @@ kotlin {
             isIncludeAndroidResources = true
             enableCoverage = true
         }
+        withDeviceTestBuilder {
+        }.configure {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            animationsDisabled = true
+            managedDevices.localDevices.create("managedVirtualDevice") {
+                device = "Pixel 2"
+                apiLevel = 35
+            }
+        }
         packaging.resources.excludes.add("META-INF/**")
     }
 
@@ -75,6 +84,7 @@ kotlin {
 
         getByName("androidHostTest") {
             dependencies {
+                implementation(kotlin("test"))
                 implementation(libs.androidx.uitest.junit4)
                 implementation(libs.androidx.uitest.testManifest)
             }
