@@ -5,7 +5,7 @@ include(
     ":app:androidApp",
     ":app:desktopApp",
     ":app:webApp",
-    ":composeApp",
+    ":diApp",
     ":core:coreCommon",
     ":core:corePref",
     ":navigation",

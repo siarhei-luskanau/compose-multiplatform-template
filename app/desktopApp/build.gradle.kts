@@ -21,8 +21,7 @@ kotlin {
 dependencies {
     implementation(libs.jetbrains.compose.components.resources)
     implementation(libs.jetbrains.compose.ui)
-    implementation(projects.composeApp)
-    implementation(projects.ui.uiCommon)
+    implementation(projects.diApp)
 }
 
 compose.desktop {
