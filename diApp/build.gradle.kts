@@ -1,5 +1,4 @@
 plugins {
-    id("androidTestConvention")
     id("composeMultiplatformConvention")
     alias(libs.plugins.roborazzi)
 }
