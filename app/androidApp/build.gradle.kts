@@ -76,5 +76,5 @@ dependencies {
     debugImplementation(libs.leakcanary.android)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.datastore.core.okio)
-    implementation(projects.composeApp)
+    implementation(projects.diApp)
 }

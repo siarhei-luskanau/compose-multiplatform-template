@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.jetbrains.compose.ui)
-            implementation(projects.composeApp)
+            implementation(projects.diApp)
         }
     }
 }
