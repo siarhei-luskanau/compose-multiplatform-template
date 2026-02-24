@@ -50,9 +50,8 @@ kotlin {
 
     jvm()
 
-    js { browser() }
-
-    wasmJs { browser() }
+//    js { browser() }
+//    wasmJs { browser() }
 
     iosArm64()
     iosSimulatorArm64()
@@ -77,8 +76,9 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(libs.jetbrains.compose.ui.test)
             implementation(kotlin("test"))
+            implementation(libs.jetbrains.compose.ui.test)
+            implementation(libs.kotlinx.coroutines.core)
         }
 
         androidMain.dependencies {
@@ -100,8 +100,8 @@ kotlin {
         iosMain.dependencies {
         }
 
-        webMain.dependencies {
-        }
+//        webMain.dependencies {
+//        }
     }
 
     targets
