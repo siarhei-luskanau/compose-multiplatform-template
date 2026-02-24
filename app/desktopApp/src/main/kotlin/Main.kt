@@ -5,7 +5,7 @@ import androidx.compose.ui.window.rememberWindowState
 import template.di.KoinApp
 import java.awt.Dimension
 
-fun main() =
+internal fun main() =
     application {
         Window(
             title = "compose-multiplatform-template",
