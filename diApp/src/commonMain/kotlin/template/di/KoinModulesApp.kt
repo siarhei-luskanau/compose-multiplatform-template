@@ -15,4 +15,4 @@ import template.ui.splash.SplashCommonModule
         KoinAppCommonModule::class,
     ],
 )
-class KoinModulesApp
+internal class KoinModulesApp

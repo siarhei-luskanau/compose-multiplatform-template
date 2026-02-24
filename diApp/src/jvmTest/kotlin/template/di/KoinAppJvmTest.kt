@@ -7,7 +7,7 @@ import io.github.takahirom.roborazzi.captureRoboImage
 import kotlin.test.Test
 
 @OptIn(ExperimentalTestApi::class)
-class KoinAppJvmTest {
+internal class KoinAppJvmTest {
     @Test
     fun preview() =
         runDesktopComposeUiTest {

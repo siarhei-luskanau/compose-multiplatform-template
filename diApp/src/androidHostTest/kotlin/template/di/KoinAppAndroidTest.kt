@@ -15,7 +15,7 @@ import kotlin.test.Test
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [36], qualifiers = RobolectricDeviceQualifiers.SmallPhone)
 @OptIn(ExperimentalTestApi::class)
-class KoinAppAndroidTest {
+internal class KoinAppAndroidTest {
     @Test
     fun preview() =
         runComposeUiTest {
