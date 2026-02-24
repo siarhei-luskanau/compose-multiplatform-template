@@ -5,4 +5,4 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(value = ["template.di"])
-class KoinAppCommonModule
+class DiCommonModule

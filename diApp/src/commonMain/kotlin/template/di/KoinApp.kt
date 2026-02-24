@@ -10,7 +10,7 @@ import template.navigation.NavApp
 @Composable
 fun KoinApp() =
     KoinApplication(
-        configuration = koinConfiguration<KoinModulesApp>(),
+        configuration = koinConfiguration<DiKoinApplication>(),
     ) {
         NavApp()
     }

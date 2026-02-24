@@ -10,9 +10,9 @@ import template.ui.splash.SplashCommonModule
     modules = [
         CoreCommonCommonModule::class,
         CorePrefCommonModule::class,
+        DiCommonModule::class,
         MainCommonModule::class,
         SplashCommonModule::class,
-        KoinAppCommonModule::class,
     ],
 )
-internal class KoinModulesApp
+internal class DiKoinApplication
