@@ -38,6 +38,8 @@ val appModule by lazy {
             MainViewModel(
                 initArg = it[0],
                 navigationCallback = it[1],
+                dispatcherSet = get(),
+                prefService = get(),
             )
         }
     }
