@@ -50,8 +50,15 @@ kotlin {
 
     jvm()
 
-//    js { browser() }
-//    wasmJs { browser() }
+    js {
+        browser()
+        binaries.executable()
+    }
+
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
 
     iosArm64()
     iosSimulatorArm64()
@@ -100,8 +107,8 @@ kotlin {
         iosMain.dependencies {
         }
 
-//        webMain.dependencies {
-//        }
+        webMain.dependencies {
+        }
     }
 
     targets
