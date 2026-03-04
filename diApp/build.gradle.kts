@@ -4,7 +4,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary.namespace = "template.di.app"
+    android.namespace = "template.di.app"
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.coreCommon)

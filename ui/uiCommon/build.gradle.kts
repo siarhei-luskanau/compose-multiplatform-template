@@ -2,10 +2,10 @@ plugins {
     id("composeMultiplatformConvention")
 }
 
-kotlin.androidLibrary.namespace = "template.ui.common"
+kotlin.android.namespace = "template.ui.common"
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = "${kotlin.androidLibrary.namespace}.resources"
+    packageOfResClass = "${kotlin.android.namespace}.resources"
     generateResClass = always
 }

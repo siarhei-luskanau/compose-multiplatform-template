@@ -3,7 +3,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary.namespace = "template.ui.splash"
+    android.namespace = "template.ui.splash"
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.coreCommon)

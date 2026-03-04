@@ -4,7 +4,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary.namespace = "template.core.pref"
+    android.namespace = "template.core.pref"
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)

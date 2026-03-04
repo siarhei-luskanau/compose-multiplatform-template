@@ -4,7 +4,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary.namespace = "template.navigation"
+    android.namespace = "template.navigation"
     sourceSets {
         commonMain.dependencies {
             implementation(libs.jetbrains.navigation3.ui)

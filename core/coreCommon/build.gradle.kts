@@ -2,4 +2,4 @@ plugins {
     id("composeMultiplatformConvention")
 }
 
-kotlin.androidLibrary.namespace = "template.core.common"
+kotlin.android.namespace = "template.core.common"
