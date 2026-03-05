@@ -11,9 +11,8 @@ internal class KoinAppJvmTest {
     @Test
     fun preview() =
         runDesktopComposeUiTest {
-            setContent {
-                KoinApp()
-            }
+            setContent { KoinApp() }
+            waitForIdle()
             onRoot().captureRoboImage()
         }
 }

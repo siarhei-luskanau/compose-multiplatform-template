@@ -12,9 +12,8 @@ internal class KoinAppIosTest {
     @Test
     fun preview() =
         runComposeUiTest {
-            setContent {
-                KoinApp()
-            }
+            setContent { KoinApp() }
+            waitForIdle()
             onRoot().captureRoboImage(this, filePath = "template.di.KoinAppIosTest.preview.png")
         }
 }

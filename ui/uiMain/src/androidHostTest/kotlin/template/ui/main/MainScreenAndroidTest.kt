@@ -19,9 +19,8 @@ internal class MainScreenAndroidTest {
     @Test
     fun preview() =
         runComposeUiTest {
-            setContent {
-                MainScreenPreview()
-            }
+            setContent { MainScreenPreview() }
+            waitForIdle()
             onRoot().captureRoboImage()
         }
 }

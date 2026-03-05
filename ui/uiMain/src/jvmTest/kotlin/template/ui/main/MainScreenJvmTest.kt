@@ -11,9 +11,8 @@ internal class MainScreenJvmTest {
     @Test
     fun preview() =
         runDesktopComposeUiTest {
-            setContent {
-                MainScreenPreview()
-            }
+            setContent { MainScreenPreview() }
+            waitForIdle()
             onRoot().captureRoboImage()
         }
 }
