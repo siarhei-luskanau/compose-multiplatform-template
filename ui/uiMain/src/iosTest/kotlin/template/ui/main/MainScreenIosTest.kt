@@ -12,9 +12,8 @@ internal class MainScreenIosTest {
     @Test
     fun preview() =
         runComposeUiTest {
-            setContent {
-                MainScreenPreview()
-            }
+            setContent { MainScreenPreview() }
+            waitForIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.main.MainScreenIosTest.preview.png")
         }
 }
