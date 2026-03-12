@@ -5,11 +5,12 @@ import androidx.datastore.core.DataStoreFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Single
 internal class PrefServiceDataStore(
-    private val storageProvider: StorageProvider,
+    @Provided private val storageProvider: StorageProvider,
 ) : PrefService {
     private val parser by lazy { Json { prettyPrint = true } }
 
