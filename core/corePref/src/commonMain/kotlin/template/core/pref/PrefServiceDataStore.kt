@@ -2,29 +2,22 @@ package template.core.pref
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
-import androidx.datastore.core.okio.OkioStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
-import okio.FileSystem
 import org.koin.core.annotation.Single
 
 @Single
 internal class PrefServiceDataStore(
-    private val prefPathProvider: PrefPathProvider,
+    private val storageProvider: StorageProvider,
 ) : PrefService {
     private val parser by lazy { Json { prettyPrint = true } }
 
-    override fun getUserPreferenceContent(): Flow<String?> = getFlowFromDataStore { parser.encodeToString(it) }
+    override fun getUserPreferenceContent(): Flow<String?> = getFlowFromDataStore { parser.encodeToString(PrefData.serializer(), it) }
 
     private val dataStore: DataStore<PrefData> by lazy {
         DataStoreFactory.create(
-            storage =
-                OkioStorage(
-                    fileSystem = FileSystem.SYSTEM,
-                    serializer = PrefSerializer(),
-                    producePath = { prefPathProvider.get() },
-                ),
+            storage = storageProvider.getStorage(serializer = PrefSerializer()),
             corruptionHandler = null,
             migrations = emptyList(),
         )
