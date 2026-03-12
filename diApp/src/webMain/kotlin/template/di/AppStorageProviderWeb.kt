@@ -1,19 +1,18 @@
-package template.core.pref
+package template.di
 
 import androidx.datastore.core.Storage
 import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.WebStorage
 import androidx.datastore.core.okio.WebStorageType
 import org.koin.core.annotation.Single
+import template.core.pref.StorageProvider
 
 @Single
-internal class TestStorageProvider : StorageProvider {
+internal class AppStorageProviderWeb : StorageProvider {
     override fun <T> getStorage(serializer: OkioSerializer<T>): Storage<T> =
         WebStorage(
             serializer = serializer,
-            name = "test.app.pref.json",
+            name = "app.pref.json",
             storageType = WebStorageType.LOCAL,
         )
 }
-
-actual fun cleanUpTestStorage() = Unit
