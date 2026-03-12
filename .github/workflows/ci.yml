@@ -65,7 +65,7 @@ jobs:
             experimental: false
             emulator: true
           - gradle-tasks: "iosSimulatorArm64Test"
-            os: macos-latest
+            os: macOS-26
             experimental: false
             emulator: false
     steps:
@@ -126,7 +126,7 @@ jobs:
 
   VerifyScreenshot:
     needs: VerifyScreenshotMatrixSetup
-    runs-on: macos-latest
+    runs-on: macOS-26
     strategy:
       fail-fast: false
       matrix:
@@ -202,7 +202,7 @@ jobs:
 
 
   iOS:
-    runs-on: macos-latest
+    runs-on: macOS-26
     steps:
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
