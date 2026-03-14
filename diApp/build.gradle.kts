@@ -20,6 +20,10 @@ kotlin {
             implementation(libs.roborazzi.compose.desktop)
         }
 
+        androidMain.dependencies {
+            implementation(libs.androidx.datastore.tink)
+        }
+
         androidHostTest.dependencies {
             implementation(libs.robolectric)
             implementation(libs.roborazzi)
