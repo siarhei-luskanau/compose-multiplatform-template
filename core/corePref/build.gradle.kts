@@ -10,5 +10,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.androidx.datastore.core.okio)
         }
+        commonTest.dependencies {
+            implementation(libs.kotlinx.coroutines.test)
+        }
     }
 }

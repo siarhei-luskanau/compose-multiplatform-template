@@ -1,7 +1,7 @@
 package template.core.pref
 
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.koin.core.context.stopKoin
 import org.koin.plugin.module.dsl.koinApplication
 import kotlin.test.Ignore
@@ -14,7 +14,7 @@ expect fun cleanUpTestStorage()
 internal class PrefServiceCommonTest {
     @Test
     fun writeAndReadKey() =
-        runBlocking {
+        runTest {
             cleanUpTestStorage()
             val koinApplication = koinApplication<TestKoinApplication>()
             val service = koinApplication.koin.get<PrefService>()
@@ -28,12 +28,12 @@ internal class PrefServiceCommonTest {
     @Test
     fun persistenceAcrossKoinSessions() {
         cleanUpTestStorage()
-        runBlocking {
+        runTest {
             val koinApplication1 = koinApplication<TestKoinApplication>()
             koinApplication1.koin.get<PrefService>().setKey("alice")
             stopKoin()
         }
-        runBlocking {
+        runTest {
             val koinApplication2 = koinApplication<TestKoinApplication>()
             val service = koinApplication2.koin.get<PrefService>()
             assertEquals("alice", service.getKey().first())
