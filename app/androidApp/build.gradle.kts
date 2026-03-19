@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
@@ -58,14 +59,11 @@ android {
 }
 
 kotlin {
-    jvmToolchain(
-        libs.versions.javaVersion
-            .get()
-            .toInt(),
-    )
-
-    compilerOptions {
-        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    android {
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(libs.versions.javaVersion.get())
+            freeCompilerArgs.add("-Xexplicit-backing-fields")
+        }
     }
 }
 

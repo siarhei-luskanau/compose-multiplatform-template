@@ -1,4 +1,5 @@
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 val libs = the<LibrariesForLibs>()
@@ -12,17 +13,12 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(
-        libs.versions.javaVersion
-            .get()
-            .toInt(),
-    )
-
     compilerOptions {
         freeCompilerArgs.add("-Xexplicit-backing-fields")
     }
 
     android {
+        compilerOptions { jvmTarget = JvmTarget.fromTarget(libs.versions.javaVersion.get()) }
         compileSdk =
             libs.versions.build.android.compileSdk
                 .get()
@@ -48,7 +44,9 @@ kotlin {
         packaging.resources.excludes.add("META-INF/**")
     }
 
-    jvm()
+    jvm {
+        compilerOptions { jvmTarget = JvmTarget.fromTarget(libs.versions.javaVersion.get()) }
+    }
 
     js {
         browser()
