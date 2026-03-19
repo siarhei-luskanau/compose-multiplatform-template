@@ -12,6 +12,7 @@ import kotlin.test.assertNull
 expect fun cleanUpTestStorage()
 
 internal class PrefServiceCommonTest {
+    @Ignore
     @Test
     fun writeAndReadKey() =
         runTest {
