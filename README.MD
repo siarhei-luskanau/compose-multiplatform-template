@@ -20,16 +20,17 @@ To run the application on iPhone device/simulator:
 - Or use [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) for Android Studio
 - Run iOS simulator UI tests: `./gradlew iosSimulatorArm64Test`
 
-### Web Distribution
-Build web distribution: `./gradlew :app:webApp:composeCompatibilityBrowserDistribution`  
-Deploy a dir `app/webApp/build/dist/composeWebCompatibility/productionExecutable` to a web server
-
 ### JS Browser
 Run the browser application: `./gradlew :app:webApp:jsBrowserDevelopmentRun`
+Run browser UI tests: `./gradlew jsBrowserTest`
+Build web distribution: `./gradlew :app:webApp:jsBrowserDistribution`  
+Deploy a dir `app/webApp/build/dist/js/productionExecutable` to a web server
 
 ### Wasm Browser
 Run the browser application: `./gradlew :app:webApp:wasmJsBrowserDevelopmentRun`  
-Run browser UI tests: `./gradlew :app:webApp:wasmJsBrowserTest`
+Run browser UI tests: `./gradlew wasmJsBrowserTest`
+Build web distribution: `./gradlew :app:webApp:wasmJsBrowserDistribution`  
+Deploy a dir `app/webApp/build/dist/wasmJs/productionExecutable` to a web server
 
 ### Code style and linting
 - launch ktlintFormat: `./gradlew ktlintFormat`

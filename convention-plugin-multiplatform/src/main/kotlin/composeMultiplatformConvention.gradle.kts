@@ -49,12 +49,20 @@ kotlin {
     }
 
     js {
-        browser()
+        browser {
+            testTask {
+                useKarma { useChromeHeadless() }
+            }
+        }
         binaries.executable()
     }
 
     wasmJs {
-        browser()
+        browser {
+            testTask {
+                useKarma { useChromeHeadless() }
+            }
+        }
         binaries.executable()
     }
 
