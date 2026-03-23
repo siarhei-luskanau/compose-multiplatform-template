@@ -5,12 +5,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun SplashScreen(viewModelProvider: () -> SplashViewModel) {
-    val viewModel = viewModel { viewModelProvider() }
+fun SplashScreen(viewModel: SplashViewModel) {
     SplashContent(
         viewStateFlow = viewModel.viewState,
         onEvent = viewModel::onEvent,

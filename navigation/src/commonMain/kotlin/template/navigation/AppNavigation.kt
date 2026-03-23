@@ -1,13 +1,23 @@
 package template.navigation
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.navigation3.runtime.NavKey
+import org.koin.core.annotation.Single
 import template.ui.main.MainNavigationCallback
 import template.ui.splash.SplashNavigationCallback
 
-internal class AppNavigation(
-    private val backStack: MutableList<NavKey>,
-) : MainNavigationCallback,
+@Single(
+    binds = [
+        AppNavigation::class,
+        SplashNavigationCallback::class,
+        SplashNavigationCallback::class,
+    ],
+)
+internal class AppNavigation :
+    MainNavigationCallback,
     SplashNavigationCallback {
+    val backStack = mutableStateListOf<NavKey>(AppRoutes.Splash)
+
     override fun goBack() {
         if (backStack.size > 1) {
             backStack.removeLastOrNull()

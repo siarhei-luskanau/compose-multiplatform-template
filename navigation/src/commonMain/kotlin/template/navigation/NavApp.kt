@@ -1,50 +1,22 @@
 package template.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation3.runtime.NavKey
-import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import kotlinx.serialization.Serializable
-import org.koin.compose.getKoin
-import org.koin.core.parameter.parametersOf
+import org.koin.compose.navigation3.koinEntryProvider
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.mp.KoinPlatform.getKoin
 import template.ui.common.theme.AppTheme
-import template.ui.main.MainScreen
-import template.ui.splash.SplashScreen
 
-@Preview
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun NavApp() =
+fun NavApp() {
+    val koin = getKoin()
+    val appNavigation: AppNavigation = koin.get()
     AppTheme {
-        val koin = getKoin()
-        val backStack = mutableStateListOf<NavKey>(AppRoutes.Splash)
-        val appNavigation = AppNavigation(backStack = backStack)
         NavDisplay(
-            backStack = backStack,
-            onBack = { backStack.removeLastOrNull() },
-            entryProvider =
-                entryProvider {
-                    entry<AppRoutes.Splash> {
-                        SplashScreen {
-                            koin.get { parametersOf(appNavigation) }
-                        }
-                    }
-                    entry<AppRoutes.Main> {
-                        MainScreen {
-                            koin.get { parametersOf(it.initArg, appNavigation) }
-                        }
-                    }
-                },
+            backStack = appNavigation.backStack,
+            onBack = { appNavigation.goBack() },
+            entryProvider = koinEntryProvider(),
         )
     }
-
-internal sealed interface AppRoutes : NavKey {
-    @Serializable
-    data object Splash : AppRoutes
-
-    @Serializable
-    data class Main(
-        val initArg: String,
-    ) : AppRoutes
 }
