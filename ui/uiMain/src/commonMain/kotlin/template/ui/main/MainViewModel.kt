@@ -5,16 +5,16 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
+import org.koin.core.annotation.KoinViewModel
 import org.koin.core.annotation.Provided
 import template.core.common.DispatcherSet
 import template.core.pref.PrefService
 
-@Factory
+@KoinViewModel
 class MainViewModel(
     @InjectedParam private val initArg: String,
-    @InjectedParam private val navigationCallback: MainNavigationCallback,
+    @Provided private val navigationCallback: MainNavigationCallback,
     @Provided private val dispatcherSet: DispatcherSet,
     @Provided private val prefService: PrefService,
 ) : ViewModel() {

@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
@@ -22,8 +21,7 @@ import template.ui.common.resources.ic_arrow_back
 import template.ui.common.theme.AppTheme
 
 @Composable
-fun MainScreen(viewModelProvider: () -> MainViewModel) {
-    val viewModel = viewModel { viewModelProvider() }
+fun MainScreen(viewModel: MainViewModel) {
     MainContent(
         viewStateFlow = viewModel.viewState,
         onEvent = viewModel::onEvent,

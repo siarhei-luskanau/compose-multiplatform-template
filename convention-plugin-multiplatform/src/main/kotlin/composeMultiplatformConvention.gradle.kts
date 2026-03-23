@@ -76,6 +76,7 @@ kotlin {
             implementation(libs.jetbrains.window.core)
             implementation(libs.koin.annotations)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
             implementation(libs.kotlinx.coroutines.core)
             implementation(project.dependencies.platform(libs.koin.bom))
         }
