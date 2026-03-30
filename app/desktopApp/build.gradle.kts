@@ -14,6 +14,11 @@ kotlin {
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.toVersion(libs.versions.javaVersion.get())
+    targetCompatibility = JavaVersion.toVersion(libs.versions.javaVersion.get())
+}
+
 dependencies {
     implementation(libs.jetbrains.compose.components.resources)
     implementation(libs.jetbrains.compose.ui)
