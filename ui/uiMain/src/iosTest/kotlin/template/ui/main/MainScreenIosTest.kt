@@ -2,7 +2,7 @@ package template.ui.main
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.runComposeUiTest
+import androidx.compose.ui.test.runSkikoComposeUiTest
 import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
 import io.github.takahirom.roborazzi.captureRoboImage
 import kotlin.test.Test
@@ -11,7 +11,7 @@ import kotlin.test.Test
 internal class MainScreenIosTest {
     @Test
     fun preview() =
-        runComposeUiTest {
+        runSkikoComposeUiTest {
             setContent { MainScreenPreview() }
             waitForIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.main.MainScreenIosTest.preview.png")
