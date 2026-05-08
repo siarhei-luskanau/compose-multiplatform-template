@@ -10,10 +10,10 @@ import kotlin.test.Test
 @OptIn(ExperimentalTestApi::class, ExperimentalRoborazziApi::class)
 internal class KoinAppIosTest {
     @Test
-    fun preview() =
+    fun previewLight() =
         runSkikoComposeUiTest {
-            setContent { KoinApp() }
+            setContent { KoinAppPreviewLight() }
             waitForIdle()
-            onRoot().captureRoboImage(this, filePath = "template.di.KoinAppIosTest.preview.png")
+            onRoot().captureRoboImage(this, filePath = "template.di.KoinAppIosTest.previewLight.png")
         }
 }

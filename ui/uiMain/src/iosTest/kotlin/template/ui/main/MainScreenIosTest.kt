@@ -10,10 +10,10 @@ import kotlin.test.Test
 @OptIn(ExperimentalTestApi::class, ExperimentalRoborazziApi::class)
 internal class MainScreenIosTest {
     @Test
-    fun preview() =
+    fun previewLight() =
         runSkikoComposeUiTest {
-            setContent { MainScreenPreview() }
+            setContent { MainScreenPreviewLight() }
             waitForIdle()
-            onRoot().captureRoboImage(this, filePath = "template.ui.main.MainScreenIosTest.preview.png")
+            onRoot().captureRoboImage(this, filePath = "template.ui.main.MainScreenIosTest.previewLight.png")
         }
 }
