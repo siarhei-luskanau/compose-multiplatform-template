@@ -2,7 +2,7 @@ package template.ui.main
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.runDesktopComposeUiTest
+import androidx.compose.ui.test.v2.runComposeUiTest
 import io.github.takahirom.roborazzi.captureRoboImage
 import kotlin.test.Test
 
@@ -10,7 +10,7 @@ import kotlin.test.Test
 internal class MainScreenJvmTest {
     @Test
     fun previewLight() =
-        runDesktopComposeUiTest {
+        runComposeUiTest {
             setContent { MainScreenPreviewLight() }
             waitForIdle()
             onRoot().captureRoboImage()

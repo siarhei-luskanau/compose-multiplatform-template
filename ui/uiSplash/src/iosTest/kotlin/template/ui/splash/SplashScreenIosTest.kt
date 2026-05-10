@@ -2,7 +2,7 @@ package template.ui.splash
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.runSkikoComposeUiTest
+import androidx.compose.ui.test.v2.runComposeUiTest
 import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
 import io.github.takahirom.roborazzi.captureRoboImage
 import kotlin.test.Test
@@ -11,7 +11,7 @@ import kotlin.test.Test
 internal class SplashScreenIosTest {
     @Test
     fun loadingLight() =
-        runSkikoComposeUiTest {
+        runComposeUiTest {
             setContent { SplashScreenLoadingPreviewLight() }
             waitForIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.loadingLight.png")
@@ -19,7 +19,7 @@ internal class SplashScreenIosTest {
 
     @Test
     fun successLight() =
-        runSkikoComposeUiTest {
+        runComposeUiTest {
             setContent { SplashScreenSuccessPreviewLight() }
             waitForIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.successLight.png")
@@ -27,7 +27,7 @@ internal class SplashScreenIosTest {
 
     @Test
     fun errorLight() =
-        runSkikoComposeUiTest {
+        runComposeUiTest {
             setContent { SplashScreenErrorPreviewLight() }
             waitForIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.errorLight.png")
