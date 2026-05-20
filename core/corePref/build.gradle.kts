@@ -7,11 +7,15 @@ kotlin {
     android.namespace = "template.core.pref"
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlinx.serialization.json)
             implementation(libs.androidx.datastore.core.okio)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(projects.core.coreCommon)
         }
         commonTest.dependencies {
             implementation(libs.kotlinx.coroutines.test)
+        }
+        androidMain.dependencies {
+            implementation(libs.androidx.datastore.tink)
         }
     }
 }

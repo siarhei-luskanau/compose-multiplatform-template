@@ -6,12 +6,10 @@ import androidx.datastore.core.okio.WebLocalStorage
 import org.koin.core.annotation.Single
 
 @Single
-internal class TestStorageProvider : StorageProvider {
+internal class AppStorageProviderWeb : StorageProvider {
     override fun <T> getStorage(serializer: OkioSerializer<T>): Storage<T> =
         WebLocalStorage(
             serializer = serializer,
-            name = "test.app.pref.json",
+            name = "app.pref.json",
         )
 }
-
-actual fun cleanUpTestStorage() = Unit

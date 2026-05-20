@@ -1,4 +1,4 @@
-package template.di
+package template.core.pref
 
 import androidx.datastore.core.Storage
 import androidx.datastore.core.okio.OkioSerializer
@@ -6,7 +6,6 @@ import androidx.datastore.core.okio.OkioStorage
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import org.koin.core.annotation.Single
-import template.core.pref.StorageProvider
 import java.io.File
 
 @Single
