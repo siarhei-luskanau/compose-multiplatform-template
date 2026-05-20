@@ -9,15 +9,13 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-expect fun cleanUpTestStorage()
-
 internal class PrefServiceCommonTest {
     @Test
     fun writeAndReadKey() =
         runTest {
-            cleanUpTestStorage()
             val koinApplication = koinApplication<TestKoinApplication>()
             val service = koinApplication.koin.get<PrefService>()
+            service.cleanStorage()
             assertNull(service.getKey().first())
             service.setKey("test-value")
             assertEquals("test-value", service.getKey().first())
@@ -27,10 +25,11 @@ internal class PrefServiceCommonTest {
     @Ignore // There are multiple DataStores active for the same
     @Test
     fun persistenceAcrossKoinSessions() {
-        cleanUpTestStorage()
         runTest {
             val koinApplication1 = koinApplication<TestKoinApplication>()
-            koinApplication1.koin.get<PrefService>().setKey("alice")
+            val service = koinApplication1.koin.get<PrefService>()
+            service.cleanStorage()
+            service.setKey("alice")
             stopKoin()
         }
         runTest {

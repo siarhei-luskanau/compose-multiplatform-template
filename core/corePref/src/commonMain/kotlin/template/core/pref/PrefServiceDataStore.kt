@@ -5,12 +5,11 @@ import androidx.datastore.core.DataStoreFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
-import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Single
 internal class PrefServiceDataStore(
-    @Provided private val storageProvider: StorageProvider,
+    private val storageProvider: StorageProvider,
 ) : PrefService {
     private val parser by lazy { Json { prettyPrint = true } }
 
@@ -22,6 +21,10 @@ internal class PrefServiceDataStore(
             corruptionHandler = null,
             migrations = emptyList(),
         )
+    }
+
+    override suspend fun cleanStorage() {
+        dataStore.updateData { PrefData(key = null) }
     }
 
     override fun getKey(): Flow<String?> = getFlowFromDataStore { it.key }
