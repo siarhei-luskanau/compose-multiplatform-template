@@ -1,4 +1,4 @@
-package template.di
+package template.core.pref
 
 import android.content.Context
 import androidx.datastore.core.Serializer
@@ -22,7 +22,6 @@ import okio.sink
 import okio.source
 import org.koin.core.annotation.Single
 import template.core.common.DispatcherSet
-import template.core.pref.StorageProvider
 import java.io.InputStream
 import java.io.OutputStream
 

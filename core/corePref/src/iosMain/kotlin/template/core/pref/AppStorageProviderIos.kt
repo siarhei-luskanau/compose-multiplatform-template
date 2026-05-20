@@ -1,4 +1,4 @@
-package template.di
+package template.core.pref
 
 import androidx.datastore.core.Storage
 import androidx.datastore.core.okio.OkioSerializer
@@ -11,7 +11,6 @@ import org.koin.core.annotation.Single
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
-import template.core.pref.StorageProvider
 
 @Single
 internal class AppStorageProviderIos : StorageProvider {
