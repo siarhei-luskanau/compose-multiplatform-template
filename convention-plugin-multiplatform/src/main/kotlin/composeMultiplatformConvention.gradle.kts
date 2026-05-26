@@ -119,10 +119,6 @@ kotlin {
         }
 }
 
-koinCompiler {
-    compileSafety = false
-}
-
 tasks.withType<Test>().matching { it.name.contains("AndroidHostTest") }.configureEach {
     exclude("**/*CommonTest*")
 }

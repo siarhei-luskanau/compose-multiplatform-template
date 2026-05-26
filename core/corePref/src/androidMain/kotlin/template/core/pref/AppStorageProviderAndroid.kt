@@ -20,6 +20,7 @@ import okio.Path.Companion.toPath
 import okio.buffer
 import okio.sink
 import okio.source
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 import template.core.common.DispatcherSet
 import java.io.InputStream
@@ -28,7 +29,7 @@ import java.io.OutputStream
 @Single
 internal class AppStorageProviderAndroid(
     private val context: Context,
-    private val dispatcherSet: DispatcherSet,
+    @Provided private val dispatcherSet: DispatcherSet,
 ) : StorageProvider {
     private val aead: Aead by lazy {
         try {
