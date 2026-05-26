@@ -17,7 +17,7 @@ internal class PrefServiceDataStore(
 
     private val dataStore: DataStore<PrefData> by lazy {
         DataStoreFactory.create(
-            storage = storageProvider.getStorage(serializer = PrefSerializer()),
+            storage = storageProvider.getStorage(),
             corruptionHandler = null,
             migrations = emptyList(),
         )

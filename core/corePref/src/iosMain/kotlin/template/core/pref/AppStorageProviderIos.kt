@@ -1,7 +1,6 @@
 package template.core.pref
 
 import androidx.datastore.core.Storage
-import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
 import kotlinx.cinterop.ExperimentalForeignApi
 import okio.FileSystem
@@ -15,10 +14,10 @@ import platform.Foundation.NSUserDomainMask
 @Single
 internal class AppStorageProviderIos : StorageProvider {
     @OptIn(ExperimentalForeignApi::class)
-    override fun <T> getStorage(serializer: OkioSerializer<T>): Storage<T> =
+    override fun getStorage(): Storage<PrefData> =
         OkioStorage(
             fileSystem = FileSystem.SYSTEM,
-            serializer = serializer,
+            serializer = PrefSerializer(),
             producePath = {
                 (
                     NSFileManager.defaultManager

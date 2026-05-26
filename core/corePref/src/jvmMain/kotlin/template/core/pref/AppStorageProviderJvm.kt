@@ -1,7 +1,6 @@
 package template.core.pref
 
 import androidx.datastore.core.Storage
-import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
 import okio.FileSystem
 import okio.Path.Companion.toPath
@@ -10,7 +9,7 @@ import java.io.File
 
 @Single
 internal class AppStorageProviderJvm : StorageProvider {
-    override fun <T> getStorage(serializer: OkioSerializer<T>): Storage<T> {
+    override fun getStorage(): Storage<PrefData> {
         val storageFile =
             File(
                 listOf(
@@ -22,7 +21,7 @@ internal class AppStorageProviderJvm : StorageProvider {
             ).also { it.parentFile?.mkdirs() }
         return OkioStorage(
             fileSystem = FileSystem.SYSTEM,
-            serializer = serializer,
+            serializer = PrefSerializer(),
             producePath = { storageFile.absolutePath.toPath() },
         )
     }

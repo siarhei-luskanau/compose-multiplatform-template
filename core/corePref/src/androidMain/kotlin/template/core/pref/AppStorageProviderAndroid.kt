@@ -45,10 +45,10 @@ internal class AppStorageProviderAndroid(
         }
     }
 
-    override fun <T> getStorage(serializer: OkioSerializer<T>): Storage<T> =
+    override fun getStorage(): Storage<PrefData> =
         OkioStorage(
             fileSystem = FileSystem.SYSTEM,
-            serializer = serializer.withAeadEncryption(aead),
+            serializer = PrefSerializer().withAeadEncryption(aead),
             producePath = {
                 runBlocking(dispatcherSet.ioDispatcher()) {
                     context.filesDir
