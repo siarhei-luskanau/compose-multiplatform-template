@@ -24,7 +24,7 @@ internal class PrefServiceDataStore(
     }
 
     override suspend fun cleanStorage() {
-        dataStore.updateData { PrefData(key = null) }
+        dataStore.updateData { PrefData.DEFAULT }
     }
 
     override fun getKey(): Flow<String?> = getFlowFromDataStore { it.key }
