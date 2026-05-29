@@ -8,7 +8,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.coreCommon)
-            implementation(projects.core.corePref)
+            implementation(projects.core.corePrefDatastore)
             implementation(projects.navigation)
             implementation(projects.ui.uiCommon)
             implementation(projects.ui.uiMain)
