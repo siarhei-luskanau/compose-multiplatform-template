@@ -6,6 +6,8 @@ include(
     ":app:desktopApp",
     ":app:webApp",
     ":core:coreCommon",
+    ":core:coreDatabaseApi",
+    ":core:coreDatabaseRoom",
     ":core:coreNetworkApi",
     ":core:coreNetworkKtor",
     ":core:corePrefApi",
