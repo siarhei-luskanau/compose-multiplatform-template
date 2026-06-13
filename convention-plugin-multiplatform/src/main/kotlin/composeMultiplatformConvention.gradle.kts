@@ -121,6 +121,7 @@ tasks.withType<Test>().matching { it.name.contains("AndroidHostTest") }.configur
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>().configureEach {
     compilerOptions {
+        freeCompilerArgs.add("-Xthreads=${Runtime.getRuntime().availableProcessors()}")
         freeCompilerArgs.add("-Xbackend-threads=${Runtime.getRuntime().availableProcessors()}")
     }
 }
