@@ -13,6 +13,7 @@ internal class KoinAppJvmTest {
         runComposeUiTest {
             setContent { KoinAppPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

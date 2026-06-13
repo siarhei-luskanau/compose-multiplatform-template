@@ -15,6 +15,7 @@ internal class SplashScreenCommonTest {
         runComposeUiTest {
             setContent { SplashScreenLoadingPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().printToLog("StartTag")
             onNodeWithText("Splash: Loading").assertIsDisplayed()
         }
@@ -24,6 +25,7 @@ internal class SplashScreenCommonTest {
         runComposeUiTest {
             setContent { SplashScreenSuccessPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().printToLog("StartTag")
             onNodeWithText("Splash: Preview").assertIsDisplayed()
         }
@@ -33,6 +35,7 @@ internal class SplashScreenCommonTest {
         runComposeUiTest {
             setContent { SplashScreenErrorPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().printToLog("StartTag")
             onNodeWithText("Splash: Error").assertIsDisplayed()
         }

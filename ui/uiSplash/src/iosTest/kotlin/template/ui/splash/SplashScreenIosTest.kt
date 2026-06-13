@@ -14,6 +14,7 @@ internal class SplashScreenIosTest {
         runComposeUiTest {
             setContent { SplashScreenLoadingPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.loadingLight.png")
         }
 
@@ -22,6 +23,7 @@ internal class SplashScreenIosTest {
         runComposeUiTest {
             setContent { SplashScreenSuccessPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.successLight.png")
         }
 
@@ -30,6 +32,7 @@ internal class SplashScreenIosTest {
         runComposeUiTest {
             setContent { SplashScreenErrorPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.errorLight.png")
         }
 }

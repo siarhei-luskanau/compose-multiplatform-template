@@ -13,6 +13,7 @@ internal class AppThemeJvmTest {
         runComposeUiTest {
             setContent { AppThemeColorsPreview() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

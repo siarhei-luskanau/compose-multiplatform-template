@@ -119,6 +119,12 @@ tasks.withType<Test>().matching { it.name.contains("AndroidHostTest") }.configur
     exclude("**/*CommonTest*")
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>().configureEach {
+    compilerOptions {
+        freeCompilerArgs.add("-Xbackend-threads=${Runtime.getRuntime().availableProcessors()}")
+    }
+}
+
 tasks.withType<AbstractTestTask>().configureEach {
     failOnNoDiscoveredTests = false
 }
