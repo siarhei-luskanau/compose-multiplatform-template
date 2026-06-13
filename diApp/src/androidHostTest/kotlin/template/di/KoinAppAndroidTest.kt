@@ -21,6 +21,7 @@ internal class KoinAppAndroidTest {
         runComposeUiTest {
             setContent { KoinAppPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -30,6 +31,7 @@ internal class KoinAppAndroidTest {
         runComposeUiTest {
             setContent { KoinAppPreviewNight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

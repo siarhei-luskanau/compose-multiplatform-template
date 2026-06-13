@@ -14,6 +14,7 @@ internal class AppThemeIosTest {
         runComposeUiTest {
             setContent { AppThemeColorsPreview() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.common.theme.AppThemeIosTest.colors.png")
         }
 }

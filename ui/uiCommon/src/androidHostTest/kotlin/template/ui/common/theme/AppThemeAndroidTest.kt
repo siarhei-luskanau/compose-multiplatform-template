@@ -21,6 +21,7 @@ internal class AppThemeAndroidTest {
         runComposeUiTest {
             setContent { AppThemeColorsPreview() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

@@ -21,6 +21,7 @@ internal class SplashScreenAndroidTest {
         runComposeUiTest {
             setContent { SplashScreenLoadingPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -30,6 +31,7 @@ internal class SplashScreenAndroidTest {
         runComposeUiTest {
             setContent { SplashScreenLoadingPreviewNight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -38,6 +40,7 @@ internal class SplashScreenAndroidTest {
         runComposeUiTest {
             setContent { SplashScreenSuccessPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -47,6 +50,7 @@ internal class SplashScreenAndroidTest {
         runComposeUiTest {
             setContent { SplashScreenSuccessPreviewNight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -55,6 +59,7 @@ internal class SplashScreenAndroidTest {
         runComposeUiTest {
             setContent { SplashScreenErrorPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -64,6 +69,7 @@ internal class SplashScreenAndroidTest {
         runComposeUiTest {
             setContent { SplashScreenErrorPreviewNight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

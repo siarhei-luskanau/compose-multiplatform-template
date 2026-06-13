@@ -21,6 +21,7 @@ internal class MainScreenAndroidTest {
         runComposeUiTest {
             setContent { MainScreenPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 
@@ -30,6 +31,7 @@ internal class MainScreenAndroidTest {
         runComposeUiTest {
             setContent { MainScreenPreviewNight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

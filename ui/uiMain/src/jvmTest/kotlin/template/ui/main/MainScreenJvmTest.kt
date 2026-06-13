@@ -13,6 +13,7 @@ internal class MainScreenJvmTest {
         runComposeUiTest {
             setContent { MainScreenPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage()
         }
 }

@@ -15,6 +15,7 @@ internal class MainScreenCommonTest {
         runComposeUiTest {
             setContent { MainScreenPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().printToLog("StartTag")
             onNodeWithText("Main: Preview").assertIsDisplayed()
         }

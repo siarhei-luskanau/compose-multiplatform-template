@@ -14,6 +14,7 @@ internal class MainScreenIosTest {
         runComposeUiTest {
             setContent { MainScreenPreviewLight() }
             waitForIdle()
+            awaitIdle()
             onRoot().captureRoboImage(this, filePath = "template.ui.main.MainScreenIosTest.previewLight.png")
         }
 }
