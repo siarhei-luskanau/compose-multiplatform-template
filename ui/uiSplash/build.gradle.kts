@@ -1,3 +1,5 @@
+import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
+
 plugins {
     id("composeMultiplatformConvention")
     id("roborazziConvention")
@@ -12,3 +14,6 @@ kotlin {
         }
     }
 }
+
+@OptIn(ExperimentalRoborazziApi::class)
+roborazzi.generateComposePreviewRobolectricTests.packages = listOfNotNull(kotlin.android.namespace)

@@ -1,3 +1,4 @@
+import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
 import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
@@ -11,9 +12,12 @@ kotlin {
     sourceSets {
         getByName("androidHostTest") {
             dependencies {
+                implementation(libs.composable.preview.scanner.android)
+                implementation(libs.junit)
                 implementation(libs.robolectric)
                 implementation(libs.roborazzi)
                 implementation(libs.roborazzi.compose)
+                implementation(libs.roborazzi.compose.preview.scanner.support)
             }
         }
 
@@ -27,5 +31,18 @@ kotlin {
     }
 }
 
-// Directory for reference images
-roborazzi.outputDir.set(file("src/screenshots"))
+roborazzi {
+    @OptIn(ExperimentalRoborazziApi::class)
+    generateComposePreviewRobolectricTests {
+        enable = true
+        robolectricConfig =
+            mapOf(
+                "sdk" to "[36]",
+                "qualifiers" to "RobolectricDeviceQualifiers.SmallPhone",
+            )
+        includePrivatePreviews = true
+    }
+
+    // Directory for reference images
+    outputDir.set(file("src/screenshots"))
+}

@@ -1,10 +1,12 @@
+import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
+
 plugins {
     id("composeMultiplatformConvention")
     id("roborazziConvention")
 }
 
 kotlin {
-    android.namespace = "template.di.app"
+    android.namespace = "template.di"
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.coreCommon)
@@ -17,3 +19,6 @@ kotlin {
         }
     }
 }
+
+@OptIn(ExperimentalRoborazziApi::class)
+roborazzi.generateComposePreviewRobolectricTests.packages = listOfNotNull(kotlin.android.namespace)
