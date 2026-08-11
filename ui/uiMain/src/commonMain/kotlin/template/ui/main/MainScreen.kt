@@ -65,18 +65,9 @@ internal fun MainContent(
 }
 
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_NO)
-@Composable
-internal fun MainScreenPreviewLight() =
-    AppTheme {
-        MainContent(
-            viewStateFlow = MutableStateFlow(MainViewState.Success("Preview")),
-            onEvent = {},
-        )
-    }
-
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_YES)
 @Composable
-internal fun MainScreenPreviewNight() =
+internal fun MainScreenPreview() =
     AppTheme {
         MainContent(
             viewStateFlow = MutableStateFlow(MainViewState.Success("Preview")),

@@ -9,27 +9,27 @@ import kotlin.test.Test
 @OptIn(ExperimentalTestApi::class)
 internal class SplashScreenJvmTest {
     @Test
-    fun loadingLight() =
+    fun loading() =
         runComposeUiTest {
-            setContent { SplashScreenLoadingPreviewLight() }
+            setContent { SplashScreenLoadingPreview() }
             waitForIdle()
             awaitIdle()
             onRoot().captureRoboImage()
         }
 
     @Test
-    fun successLight() =
+    fun success() =
         runComposeUiTest {
-            setContent { SplashScreenSuccessPreviewLight() }
+            setContent { SplashScreenSuccessPreview() }
             waitForIdle()
             awaitIdle()
             onRoot().captureRoboImage()
         }
 
     @Test
-    fun errorLight() =
+    fun error() =
         runComposeUiTest {
-            setContent { SplashScreenErrorPreviewLight() }
+            setContent { SplashScreenErrorPreview() }
             waitForIdle()
             awaitIdle()
             onRoot().captureRoboImage()

@@ -45,18 +45,9 @@ internal fun SplashContent(
 }
 
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_NO)
-@Composable
-internal fun SplashScreenLoadingPreviewLight() =
-    AppTheme {
-        SplashContent(
-            viewStateFlow = MutableStateFlow(SplashViewState.Loading),
-            onEvent = {},
-        )
-    }
-
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_YES)
 @Composable
-internal fun SplashScreenLoadingPreviewNight() =
+internal fun SplashScreenLoadingPreview() =
     AppTheme {
         SplashContent(
             viewStateFlow = MutableStateFlow(SplashViewState.Loading),
@@ -65,18 +56,9 @@ internal fun SplashScreenLoadingPreviewNight() =
     }
 
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_NO)
-@Composable
-internal fun SplashScreenSuccessPreviewLight() =
-    AppTheme {
-        SplashContent(
-            viewStateFlow = MutableStateFlow(SplashViewState.Success("Preview")),
-            onEvent = {},
-        )
-    }
-
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_YES)
 @Composable
-internal fun SplashScreenSuccessPreviewNight() =
+internal fun SplashScreenSuccessPreview() =
     AppTheme {
         SplashContent(
             viewStateFlow = MutableStateFlow(SplashViewState.Success("Preview")),
@@ -85,18 +67,9 @@ internal fun SplashScreenSuccessPreviewNight() =
     }
 
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_NO)
-@Composable
-internal fun SplashScreenErrorPreviewLight() =
-    AppTheme {
-        SplashContent(
-            viewStateFlow = MutableStateFlow(SplashViewState.Error(RuntimeException("Error"))),
-            onEvent = {},
-        )
-    }
-
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_YES)
 @Composable
-internal fun SplashScreenErrorPreviewNight() =
+internal fun SplashScreenErrorPreview() =
     AppTheme {
         SplashContent(
             viewStateFlow = MutableStateFlow(SplashViewState.Error(RuntimeException("Error"))),

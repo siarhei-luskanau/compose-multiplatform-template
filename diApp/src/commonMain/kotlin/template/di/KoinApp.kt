@@ -23,9 +23,6 @@ fun KoinApp() =
     }
 
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_NO)
-@Composable
-internal fun KoinAppPreviewLight() = AppTheme { KoinApp() }
-
 @Preview(uiMode = AndroidUiModes.UI_MODE_NIGHT_YES)
 @Composable
-internal fun KoinAppPreviewNight() = AppTheme { KoinApp() }
+internal fun KoinAppPreview() = AppTheme { KoinApp() }
