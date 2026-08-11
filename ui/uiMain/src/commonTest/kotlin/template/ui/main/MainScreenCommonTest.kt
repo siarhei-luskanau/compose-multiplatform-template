@@ -13,7 +13,7 @@ internal class MainScreenCommonTest {
     @Test
     fun simpleCheck() =
         runComposeUiTest {
-            setContent { MainScreenPreviewLight() }
+            setContent { MainScreenPreview() }
             waitForIdle()
             awaitIdle()
             onRoot().printToLog("StartTag")

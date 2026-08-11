@@ -10,29 +10,29 @@ import kotlin.test.Test
 @OptIn(ExperimentalTestApi::class, ExperimentalRoborazziApi::class)
 internal class SplashScreenIosTest {
     @Test
-    fun loadingLight() =
+    fun loading() =
         runComposeUiTest {
-            setContent { SplashScreenLoadingPreviewLight() }
+            setContent { SplashScreenLoadingPreview() }
             waitForIdle()
             awaitIdle()
-            onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.loadingLight.png")
+            onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.loading.png")
         }
 
     @Test
-    fun successLight() =
+    fun success() =
         runComposeUiTest {
-            setContent { SplashScreenSuccessPreviewLight() }
+            setContent { SplashScreenSuccessPreview() }
             waitForIdle()
             awaitIdle()
-            onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.successLight.png")
+            onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.success.png")
         }
 
     @Test
-    fun errorLight() =
+    fun error() =
         runComposeUiTest {
-            setContent { SplashScreenErrorPreviewLight() }
+            setContent { SplashScreenErrorPreview() }
             waitForIdle()
             awaitIdle()
-            onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.errorLight.png")
+            onRoot().captureRoboImage(this, filePath = "template.ui.splash.SplashScreenIosTest.error.png")
         }
 }
