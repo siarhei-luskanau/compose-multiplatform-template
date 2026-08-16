@@ -3,13 +3,13 @@ package template.core.database.room
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.koin.plugin.module.dsl.koinApplication
-import template.core.database.ExampleRecord
-import template.core.database.ExampleRepository
+import template.core.database.DatabaseRecord
+import template.core.database.DatabaseRepository
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-internal class ExampleRepositoryCommonTest {
+internal class DatabaseRepositoryCommonTest {
     @Test
     fun saveAndGetAll() =
         runTest {
@@ -20,11 +20,11 @@ internal class ExampleRepositoryCommonTest {
                     .database
                     .exampleDao()
             dao.getAll().first().forEach { dao.deleteById(it.id) }
-            val repository = koinApplication.koin.get<ExampleRepository>()
+            val repository = koinApplication.koin.get<DatabaseRepository>()
 
-            repository.save(ExampleRecord(id = "1", tag = "test"))
+            repository.save(DatabaseRecord(id = "1", tag = "test"))
 
-            assertEquals(listOf(ExampleRecord(id = "1", tag = "test")), repository.getAll().first())
+            assertEquals(listOf(DatabaseRecord(id = "1", tag = "test")), repository.getAll().first())
             koinApplication.close()
         }
 
@@ -38,9 +38,9 @@ internal class ExampleRepositoryCommonTest {
                     .database
                     .exampleDao()
             dao.getAll().first().forEach { dao.deleteById(it.id) }
-            val repository = koinApplication.koin.get<ExampleRepository>()
+            val repository = koinApplication.koin.get<DatabaseRepository>()
 
-            repository.save(ExampleRecord(id = "2", tag = "to-delete"))
+            repository.save(DatabaseRecord(id = "2", tag = "to-delete"))
             repository.delete("2")
 
             assertTrue(repository.getAll().first().isEmpty())
@@ -57,12 +57,12 @@ internal class ExampleRepositoryCommonTest {
                     .database
                     .exampleDao()
             dao.getAll().first().forEach { dao.deleteById(it.id) }
-            val repository = koinApplication.koin.get<ExampleRepository>()
+            val repository = koinApplication.koin.get<DatabaseRepository>()
 
-            repository.save(ExampleRecord(id = "3", tag = "original"))
-            repository.save(ExampleRecord(id = "3", tag = "updated"))
+            repository.save(DatabaseRecord(id = "3", tag = "original"))
+            repository.save(DatabaseRecord(id = "3", tag = "updated"))
 
-            assertEquals(listOf(ExampleRecord(id = "3", tag = "updated")), repository.getAll().first())
+            assertEquals(listOf(DatabaseRecord(id = "3", tag = "updated")), repository.getAll().first())
             koinApplication.close()
         }
 }

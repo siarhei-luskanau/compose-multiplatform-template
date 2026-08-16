@@ -10,6 +10,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.coreCommon)
+            implementation(projects.core.coreDatabaseApi)
             implementation(projects.core.corePrefApi)
             implementation(projects.ui.uiCommon)
         }

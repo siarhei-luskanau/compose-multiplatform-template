@@ -54,7 +54,7 @@ internal fun MainContent(
         val text =
             when (val result = viewState.value) {
                 is MainViewState.Error -> "Error: ${result.error.message}"
-                MainViewState.Loading -> result.toString()
+                MainViewState.Loading -> "Loading..."
                 is MainViewState.Success -> result.data
             }
         Text(
