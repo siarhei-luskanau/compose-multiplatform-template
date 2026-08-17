@@ -1,6 +1,6 @@
 package template.core.database
 
-data class ExampleRecord(
+data class DatabaseRecord(
     val id: String,
     val tag: String,
 )
