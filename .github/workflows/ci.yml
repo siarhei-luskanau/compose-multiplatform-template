@@ -90,6 +90,7 @@ jobs:
       - run: ./gradlew clean ${{ matrix.gradle-tasks }} --stacktrace
 
       - name: Get task name
+        if: always()
         id: get_task
         run: echo "taskName=$(echo ${{ matrix.gradle-tasks }} | cut -d ' ' -f 1 | tr ':' '_')" >> $GITHUB_OUTPUT
 

@@ -18,7 +18,7 @@ internal class IosRoomDatabaseProvider : RoomDatabaseProvider {
                     directory = NSDocumentDirectory,
                     inDomain = NSUserDomainMask,
                     appropriateForURL = null,
-                    create = false,
+                    create = true,
                     error = null,
                 )?.URLByAppendingPathComponent("cmp_template.db")
                 ?.path ?: "cmp_template.db"
