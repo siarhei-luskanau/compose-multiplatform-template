@@ -10,6 +10,45 @@ plugins {
     alias(libs.plugins.koin.compiler).apply(false)
     alias(libs.plugins.kotlin.jvm).apply(false)
     alias(libs.plugins.kotlin.multiplatform).apply(false)
+    alias(libs.plugins.kover)
+}
+
+kover {
+    currentProject {
+        createVariant("coverage") {}
+    }
+    reports {
+        filters {
+            excludes {
+                classes("*ComposableSingletons*")
+                classes("*_Impl", "*_Impl$*")
+                packages("org.koin.ksp.generated")
+                packages("*.generated.resources")
+            }
+        }
+        variant("coverage") {
+            verify {
+                rule {
+                    minBound(70)
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    kover(projects.core.coreCommon)
+    kover(projects.core.coreDatabaseApi)
+    kover(projects.core.coreDatabaseRoom)
+    kover(projects.core.coreNetworkApi)
+    kover(projects.core.coreNetworkKtor)
+    kover(projects.core.corePrefApi)
+    kover(projects.core.corePrefDatastore)
+    kover(projects.diApp)
+    kover(projects.navigation)
+    kover(projects.ui.uiCommon)
+    kover(projects.ui.uiMain)
+    kover(projects.ui.uiSplash)
 }
 
 allprojects {
