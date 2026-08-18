@@ -8,8 +8,18 @@ plugins {
     id("com.android.kotlin.multiplatform.library")
     id("io.insert-koin.compiler.plugin")
     id("org.jetbrains.compose")
+    id("org.jetbrains.kotlinx.kover")
     kotlin("multiplatform")
     kotlin("plugin.compose")
+}
+
+kover {
+    currentProject {
+        createVariant("coverage") {
+            add("jvm", optional = true)
+            add("android", optional = true)
+        }
+    }
 }
 
 kotlin {
