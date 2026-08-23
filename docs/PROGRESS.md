@@ -14,6 +14,15 @@ to `main`, don't let this turn into a changelog (git history already is one).
   Layer 3, not just compiles" rule were already in `AGENTS.md` constraints #10–11 and
   `docs/quality-gates.md`'s Layer 1/2/2b/3 structure; added `docs/TASKS.md` (the
   remaining piece) and linked it from `AGENTS.md`.
+- Phase 4 (E2E test + architectural constraint) done: `diApp`'s `KoinAppCommonTest`
+  (`commonTest`) now pauses `mainClock` to observe `Splash:` before resuming and
+  asserting `Main:`, exercising the real Koin + navigation graph end-to-end — verified
+  via `./gradlew :diApp:jvmTest --tests "template.di.KoinAppCommonTest"`. Root
+  `build.gradle.kts` gained a `checkModuleBoundaries` task enforcing the `*Impl` half of
+  the architecture rule (only `diApp` may depend on `coreDatabaseRoom`/`coreNetworkKtor`/
+  `corePrefDatastore`), wired into the CI `Lint` job and `docs/quality-gates.md`. See
+  `docs/DECISIONS.md` for why the check doesn't also restrict `ui/*` dependents, and why
+  it's implemented via `gradle.projectsEvaluated` instead of a plain `doLast`.
 
 ## In progress
 
@@ -25,8 +34,5 @@ to `main`, don't let this turn into a changelog (git history already is one).
 
 ## Next steps
 
-- Phase 4 (see `docs/TASKS.md`): add a true UI-flow test exercising the real navigation
-  graph (splash → main) and an executable check that fails the build if a
-  `ui/*`/`core/*Impl` module is depended on by anything other than `diApp`.
 - Phase 5: PR checklist template mirroring the termination criteria.
 - Phase 6: module-pair scaffold skill, git worktree note in `AGENTS.md`.

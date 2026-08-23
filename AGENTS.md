@@ -45,7 +45,8 @@ Full command list per gate/target: `docs/quality-gates.md`.
 1. `core/*Api` modules define interfaces/models only — zero implementation dependencies
    (no Room, Ktor, DataStore).
 2. Only `diApp` may depend on a `core/*Impl` module. `ui/*` and `navigation` depend on
-   `*Api` modules directly, never on `*Impl`.
+   `*Api` modules directly, never on `*Impl`. Gradle-enforced: `./gradlew
+   checkModuleBoundaries` fails the build on a violation.
 3. Apps (`androidApp`, `desktopApp`, `webApp`) depend only on `diApp` — never reach into
    `core/*` or `ui/*` directly.
 4. Every new `core/*` or `ui/*` module applies `id("composeMultiplatformConvention")`

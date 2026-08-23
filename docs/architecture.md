@@ -43,8 +43,13 @@ Every core capability is split into two modules:
 app/*  →  diApp  →  core/*Impl  →  core/*Api  ←  ui/*, navigation
 ```
 
-This isn't enforced by Gradle today — it's a convention. Follow the existing pattern
-when adding a new core capability rather than reaching for a shortcut.
+The `*Impl` half of this is enforced by Gradle: the root `build.gradle.kts`
+`checkModuleBoundaries` task fails the build if any module other than `diApp` declares a
+dependency on `coreDatabaseRoom`, `coreNetworkKtor`, or `corePrefDatastore` — see
+`docs/quality-gates.md`. Adding a new `core/*Impl` module means adding its path to that
+task's `coreImplModulePaths` set too. Everything else about the module map (`ui/*` and
+`navigation` depending on `*Api` modules, apps depending only on `diApp`) is still a
+followed convention, not a Gradle-checked one.
 
 ## How wiring works (Koin)
 

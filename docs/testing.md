@@ -12,10 +12,13 @@ pure logic, repository/ktor-client tests (see `coreNetworkKtor`'s
 `TestCoreNetworkKtorModule` + `ktor-client-mock`), and Compose UI logic via
 `runComposeUiTest`.
 
-`diApp`'s `KoinAppCommonTest` is the closest thing to a DI-graph smoke test today: it
-boots the real `KoinApp()` composable with the real Koin graph and asserts a screen
-renders. It does **not** exercise navigation (splash → main) — there is no true
-end-to-end UI-flow test yet.
+`diApp`'s `KoinAppCommonTest` is the true end-to-end UI-flow test: it boots the real
+`KoinApp()` composable with the real Koin graph and real navigation graph, pauses
+`mainClock` to assert the initial `Splash:` text is on screen, then resumes the clock and
+asserts the real `SplashNavigationCallback` → `AppNavigation` → `NavDisplay` round trip
+lands on the `Main` screen. This is what catches interface mismatches and navigation
+misconfiguration that isolated screen tests (`SplashScreenCommonTest`,
+`MainScreenCommonTest`) structurally can't see.
 
 **Default here unless you have a specific reason to use one of the source sets below.**
 
@@ -91,4 +94,4 @@ as `androidHostTest` applies here (see above).
 | Real activity lifecycle, permissions, hardware | `app/androidApp`'s `androidTest` (managed device) |
 | Browser-only behavior | `jsBrowserTest` / `wasmJsBrowserTest` |
 | iOS-only behavior | `iosSimulatorArm64Test` (`iosTest` source set) |
-| A real user flow across screens (splash → main) | **Gap — none exists yet** |
+| A real user flow across screens (splash → main) | `diApp`'s `KoinAppCommonTest` (`commonTest`) |

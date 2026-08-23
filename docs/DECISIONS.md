@@ -78,3 +78,42 @@ silently produces a JVM-only aggregated report under
 no `debug` variant to report on. `testAndroidHostTest` coverage only shows up in
 `koverXmlReportCoverage`/`koverHtmlReportCoverage` output once the variant name is
 `"android"`.
+
+## `checkModuleBoundaries` only enforces the `*Impl` half of the architecture rule
+
+**Decision:** the executable check (root `build.gradle.kts`) fails the build only when a
+module other than `diApp` depends on `coreDatabaseRoom`, `coreNetworkKtor`, or
+`corePrefDatastore`. It does not restrict who may depend on a `ui/*` module.
+
+**Rejected alternative:** an earlier phrasing of this work item read "fail the build if a
+`ui/*` **or** `core/*Impl` module is depended on by anything other than `diApp`". That's
+wrong for this codebase: `navigation` legitimately depends on `ui/uiMain` and
+`ui/uiSplash` to wire screens into `koinEntryProvider()`, and `diApp` depends on all three
+`ui/*` modules directly for the same reason. Enforcing "only `diApp` may depend on
+`ui/*`" would fail the build on the very wiring the app needs to run. The real, useful
+constraint — and the one already stated as hard constraint #2 in `AGENTS.md` and spelled
+out in `docs/architecture.md` — is the `*Impl` half only.
+
+**Implementation note:** the check can't run as a normal task-execution-time (`doLast`)
+closure that walks `subprojects`/`configurations` directly — Gradle's configuration cache
+rejects serializing live `Project`/`Configuration` references. It runs inside
+`gradle.projectsEvaluated { ... }` (after every subproject's `build.gradle.kts` has
+declared its dependencies, but still during configuration), computes a plain
+`List<String>` of violations there, and only that value is captured by the task's
+`doLast`.
+
+## `KoinAppCommonTest` pauses `mainClock` to observe the pre-navigation frame
+
+**Decision:** the E2E navigation test (`diApp/src/commonTest/.../KoinAppCommonTest.kt`)
+sets `mainClock.autoAdvance = false` before `setContent { KoinApp() }`, asserts the
+`Splash:` text, then sets `autoAdvance = true` and asserts the `Main:` text.
+
+**Why it's needed:** `SplashScreen`'s `LaunchedEffect(Unit) { onEvent(Launched) }` calls
+`SplashViewModel.onEvent`, which launches a `viewModelScope` coroutine that immediately
+calls `navigationCallback.goMainScreen(...)` — real Compose UI test idling
+(`waitForIdle`/`awaitIdle`, and even the implicit sync inside `setContent`) drains pending
+coroutines regardless of `mainClock`, so without pausing the clock the composition already
+shows `Main` by the time any assertion runs; there'd be no way to prove `Splash` was ever
+rendered by the real graph rather than skipped straight to `Main`. `mainClock.autoAdvance`
+only gates frame-based work (recomposition triggered by the test's synchronization loop),
+which is enough to hold the first frame steady for the assertion.

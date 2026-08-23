@@ -1,5 +1,6 @@
 import groovy.json.JsonSlurper
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.api.artifacts.ProjectDependency
 import java.io.ByteArrayOutputStream
 
 plugins {
@@ -57,6 +58,48 @@ allprojects {
     detekt {
         parallel = true
         ignoreFailures = false
+    }
+}
+
+tasks.register("checkModuleBoundaries") {
+    group = "verification"
+    description =
+        "Fails the build if a core/*Impl module is depended on by anything other than " +
+        ":diApp (see the *Api/*Impl rule in docs/architecture.md)."
+}
+
+// Dependency declarations in subproject build scripts aren't visible until every project
+// has been configured, and a config-cache-compatible task action can't capture live
+// Project/Configuration references — so the check runs here, once all projects are
+// configured, and only the resulting List<String> (plain values) is captured by doLast.
+gradle.projectsEvaluated {
+    val coreImplModulePaths =
+        setOf(
+            ":core:coreDatabaseRoom",
+            ":core:coreNetworkKtor",
+            ":core:corePrefDatastore",
+        )
+    val violations =
+        subprojects
+            .filter { it.path != ":diApp" }
+            .flatMap { subproject ->
+                subproject.configurations
+                    .flatMap { it.dependencies.withType<ProjectDependency>() }
+                    .map { it.path }
+                    .filter { it in coreImplModulePaths && it != subproject.path }
+                    .map { implPath -> "${subproject.path} -> $implPath" }
+            }.distinct()
+            .sorted()
+    tasks.named("checkModuleBoundaries") {
+        doLast {
+            if (violations.isNotEmpty()) {
+                throw GradleException(
+                    "Architectural constraint violated: only :diApp may depend on a " +
+                        "core/*Impl module (docs/architecture.md). Violations:\n" +
+                        violations.joinToString("\n") { "  - $it" },
+                )
+            }
+        }
     }
 }
 

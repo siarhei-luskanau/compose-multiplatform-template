@@ -38,7 +38,7 @@ jobs:
         with:
           commit_message: Ktlint format
 
-      - run: ./gradlew ktlintCheck detekt lint --stacktrace
+      - run: ./gradlew ktlintCheck detekt lint checkModuleBoundaries --stacktrace
 
 
 

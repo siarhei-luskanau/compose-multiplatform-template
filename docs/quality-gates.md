@@ -7,13 +7,20 @@ covers.
 ## Layer 1 — static analysis (`Lint` job)
 
 ```
-./gradlew ktlintFormat            # auto-fixes style, run this first
-./gradlew ktlintCheck detekt lint # fails the build if anything is left unfixed
+./gradlew ktlintFormat                                  # auto-fixes style, run this first
+./gradlew ktlintCheck detekt lint checkModuleBoundaries  # fails the build if anything is left unfixed
 ```
 
 CI runs `ktlintFormat` and auto-commits the result on the PR branch, then fails the
-`Lint` job if `ktlintCheck detekt lint` still finds anything. Run both locally before
-pushing so CI doesn't do the formatting for you.
+`Lint` job if `ktlintCheck detekt lint checkModuleBoundaries` still finds anything. Run
+these locally before pushing so CI doesn't do the formatting for you.
+
+`checkModuleBoundaries` (root `build.gradle.kts`) is the executable form of the
+`*Api`/`*Impl` rule in `docs/architecture.md`: it inspects every subproject's declared
+dependencies and fails with a listed violation (`<module> -> <core/*Impl module>`) if
+anything other than `:diApp` depends on `coreDatabaseRoom`, `coreNetworkKtor`, or
+`corePrefDatastore`. Adding a new `core/*Impl` module? Add its path to
+`coreImplModulePaths` in `build.gradle.kts` too.
 
 ## Layer 2 — tests (`Tests` job, matrix)
 
@@ -80,6 +87,7 @@ diffs on failure are uploaded as artifacts.
 | Gate | Artifact / report |
 |---|---|
 | `ktlintCheck` / `detekt` / `lint` | Console output; detekt HTML at `**/build/reports/detekt/` |
+| `checkModuleBoundaries` | Console output — the failure message lists every `<module> -> <core/*Impl module>` violation |
 | Test targets | `**/build/reports/` (uploaded as `reports-<task>-<os>` on CI) |
 | `koverVerifyCoverage` | `build/reports/kover/htmlCoverage/index.html`, uploaded as `coverage-report` on CI |
 | `verifyRoborazzi` | Diff images under the failing module's `build/outputs/roborazzi/`, uploaded on CI |
