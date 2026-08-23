@@ -173,6 +173,19 @@ jobs:
 
       - run: ./gradlew ${{ matrix.variants.gradle_tasks }} -DIS_DATA_STUB_ENABLED=true --stacktrace
 
+      - name: Get module name
+        if: always()
+        id: get_module
+        run: echo "moduleName=$(echo ${{ matrix.variants.module_path }} | tr ':' '_')" >> $GITHUB_OUTPUT
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: failure()
+        with:
+          name: roborazzi-diff-${{ steps.get_module.outputs.moduleName }}-${{ matrix.variants.runner }}
+          path: |
+            **/build/outputs/roborazzi/
+          retention-days: 7
+
 
 
   Android:

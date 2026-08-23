@@ -24,6 +24,13 @@ to `main`, don't let this turn into a changelog (git history already is one).
   `docs/DECISIONS.md` for why the check doesn't also restrict `ui/*` dependents, and why
   it's implemented via `gradle.projectsEvaluated` instead of a plain `doLast`.
 
+- Phase 5 (Observability) done: `.github/pull_request_template.md` mirrors the Layer
+  1/2/2b/3 termination criteria and points to CI artifact names for evidence.
+  `docs/quality-gates.md`'s Roborazzi row claimed diffs were "uploaded on CI" but the
+  `VerifyScreenshot` job had no upload step — added one (`roborazzi-diff-<module>-<os>`,
+  failure-only) to `ci.yml` so the doc claim is actually true, matching the pattern
+  already used by the `Tests`/`Coverage` jobs.
+
 ## In progress
 
 - (none)
@@ -34,5 +41,4 @@ to `main`, don't let this turn into a changelog (git history already is one).
 
 ## Next steps
 
-- Phase 5: PR checklist template mirroring the termination criteria.
 - Phase 6: module-pair scaffold skill, git worktree note in `AGENTS.md`.

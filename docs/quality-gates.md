@@ -80,7 +80,7 @@ necessary but not sufficient — it doesn't prove the app actually launches.
 
 Reference images live under each module's `src/screenshots/`. CI builds the job matrix
 dynamically (`ciVerifyScreenshotJobsMatrixSetup`) and runs `verifyRoborazzi` per module;
-diffs on failure are uploaded as artifacts.
+diffs on failure are uploaded as `roborazzi-diff-<module>-<os>` artifacts.
 
 ## Where to look when a gate fails
 
@@ -90,4 +90,4 @@ diffs on failure are uploaded as artifacts.
 | `checkModuleBoundaries` | Console output — the failure message lists every `<module> -> <core/*Impl module>` violation |
 | Test targets | `**/build/reports/` (uploaded as `reports-<task>-<os>` on CI) |
 | `koverVerifyCoverage` | `build/reports/kover/htmlCoverage/index.html`, uploaded as `coverage-report` on CI |
-| `verifyRoborazzi` | Diff images under the failing module's `build/outputs/roborazzi/`, uploaded on CI |
+| `verifyRoborazzi` | Diff images under the failing module's `build/outputs/roborazzi/`, uploaded as `roborazzi-diff-<module>-<os>` on CI (failed jobs only) |
