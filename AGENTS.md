@@ -66,8 +66,8 @@ Full command list per gate/target: `docs/quality-gates.md`.
     (`./gradlew :app:desktopApp:run` is the cheapest check), not just "it compiles" —
     see Layer 3 in `docs/quality-gates.md`.
 11. One module/feature actively worked at a time (WIP=1). A large ask ("add a new
-    platform target", "add offline sync") gets broken into an ordered list before any
-    code changes start.
+    platform target", "add offline sync") gets broken into an ordered list in
+    `docs/TASKS.md` before any code changes start.
 
 ## Session exit checklist
 
@@ -97,3 +97,6 @@ Before ending a session with non-trivial changes:
 - `docs/DECISIONS.md` — append-only log of non-obvious architectural choices and the
   alternatives that were rejected. Read before revisiting a decision that looks
   arbitrary; add an entry when you make one worth not re-litigating.
+- `docs/TASKS.md` — tracked template-improvement work as
+  `description | verification command | state`. Enforces WIP=1: at most one row
+  `active` at a time.

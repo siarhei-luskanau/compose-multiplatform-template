@@ -8,14 +8,16 @@ to `main`, don't let this turn into a changelog (git history already is one).
 
 - Phase 1 (Instructions layer) done: `AGENTS.md`, `docs/architecture.md`,
   `docs/testing.md`, `docs/quality-gates.md` exist and are current.
-- Phase 2 (Continuity across sessions) in progress: this file and `docs/DECISIONS.md`
-  just added; `AGENTS.md` Session Exit Checklist added in the same session.
+- Phase 2 (Continuity across sessions) done: `docs/PROGRESS.md`, `docs/DECISIONS.md`,
+  and `AGENTS.md` Session Exit Checklist all in place.
+- Phase 3 (WIP + termination criteria) done: WIP=1 rule and the "feature complete means
+  Layer 3, not just compiles" rule were already in `AGENTS.md` constraints #10–11 and
+  `docs/quality-gates.md`'s Layer 1/2/2b/3 structure; added `docs/TASKS.md` (the
+  remaining piece) and linked it from `AGENTS.md`.
 
 ## In progress
 
-- Harness-engineering plan phases 3–6 (WIP/termination criteria in `AGENTS.md`,
-  `docs/TASKS.md`, the E2E navigation test + executable architectural constraint,
-  the PR template, the module-pair scaffold skill) not started yet.
+- (none)
 
 ## Blocked
 
@@ -23,8 +25,8 @@ to `main`, don't let this turn into a changelog (git history already is one).
 
 ## Next steps
 
-- Phase 3: add WIP=1 rule + three-layer termination criteria to `AGENTS.md`, add
-  `docs/TASKS.md`.
-- Phase 4: add a true UI-flow test exercising the real navigation graph (splash → main)
-  and an executable check that fails the build if a `ui/*`/`core/*Impl` module is
-  depended on by anything other than `diApp`.
+- Phase 4 (see `docs/TASKS.md`): add a true UI-flow test exercising the real navigation
+  graph (splash → main) and an executable check that fails the build if a
+  `ui/*`/`core/*Impl` module is depended on by anything other than `diApp`.
+- Phase 5: PR checklist template mirroring the termination criteria.
+- Phase 6: module-pair scaffold skill, git worktree note in `AGENTS.md`.
