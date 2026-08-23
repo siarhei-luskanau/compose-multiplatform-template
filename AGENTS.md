@@ -69,6 +69,20 @@ Full command list per gate/target: `docs/quality-gates.md`.
     platform target", "add offline sync") gets broken into an ordered list before any
     code changes start.
 
+## Session exit checklist
+
+Before ending a session with non-trivial changes:
+
+1. `./gradlew ktlintFormat ktlintCheck detekt lint` — fix anything it flags.
+2. Run the tests actually touched by the change (see `docs/testing.md` for which
+   mechanism applies) — not the full suite unless the change is broad.
+3. Update `docs/PROGRESS.md` — move finished items out, note anything left in-progress
+   or blocked so the next session doesn't have to reconstruct it.
+4. If the session made a non-obvious architectural choice (rejected an alternative for a
+   reason that isn't visible in the code), add an entry to `docs/DECISIONS.md`.
+5. Remove debug/leftover code (stray `println`, commented-out blocks, temp test data)
+   before the final commit.
+
 ## Docs
 
 - `docs/architecture.md` — module dependency graph, the `*Api`/`*Impl` rule, how Koin
@@ -78,3 +92,8 @@ Full command list per gate/target: `docs/quality-gates.md`.
 - `docs/quality-gates.md` — the exact commands CI runs per layer (static analysis, unit
   tests, coverage, app-actually-runs, screenshot verification) and where to look when
   one fails. Read before declaring a change done.
+- `docs/PROGRESS.md` — current state / in-progress / blocked / next-steps. Read at the
+  start of a session, update at the end of one (see checklist above).
+- `docs/DECISIONS.md` — append-only log of non-obvious architectural choices and the
+  alternatives that were rejected. Read before revisiting a decision that looks
+  arbitrary; add an entry when you make one worth not re-litigating.
