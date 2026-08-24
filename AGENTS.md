@@ -70,6 +70,30 @@ Full command list per gate/target: `docs/quality-gates.md`.
     platform target", "add offline sync") gets broken into an ordered list in
     `docs/TASKS.md` before any code changes start.
 
+## Skills
+
+- `.claude/skills/scaffold-core-module-pair/SKILL.md` — scaffolds a new `core/*Api` +
+  `core/*Impl` module pair (module creation, `settings.gradle.kts`, `diApp` wiring,
+  `kover` aggregation, `checkModuleBoundaries` allowlist). Use this instead of doing the
+  five-step process in `docs/architecture.md` by hand.
+
+## Parallel agent work (git worktrees)
+
+`.claude/worktrees/` is where independent agents check out separate worktrees for
+concurrent tasks on this repo — it's excluded locally (`.git/info/exclude`, not tracked)
+so worktrees never collide with the main checkout or with each other:
+
+```
+git worktree add .claude/worktrees/<task-name> -b <branch-name>
+git worktree remove .claude/worktrees/<task-name>   # after the branch merges
+```
+
+Reach for this when the orchestrator's parallel-execution rule applies — different
+modules, no shared state, e.g. one agent scaffolding a new `core/*` pair while another
+touches `ui/uiMain`. It's a mechanism for running independent work concurrently, not a
+way around WIP=1 (#11) within a single line of work — one module/feature per worktree,
+same as one module/feature per session.
+
 ## Session exit checklist
 
 Before ending a session with non-trivial changes:

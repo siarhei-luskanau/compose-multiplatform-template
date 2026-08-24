@@ -31,6 +31,18 @@ to `main`, don't let this turn into a changelog (git history already is one).
   failure-only) to `ci.yml` so the doc claim is actually true, matching the pattern
   already used by the `Tests`/`Coverage` jobs.
 
+- Phase 6 (Loop engineering) done: added
+  `.claude/skills/scaffold-core-module-pair/SKILL.md` — scaffolds a new `core/*Api` +
+  `core/*Impl` pair (module creation, `settings.gradle.kts`, `diApp` wiring, `kover`
+  aggregation, `checkModuleBoundaries` allowlist) — and validated it by scaffolding a
+  throwaway `coreThrowawayApi`/`coreThrowawayFake` pair through all four steps
+  (`ktlintCheck`/`detekt`, module `assemble`, `checkModuleBoundaries`,
+  `KoinAppCommonTest`) before reverting it. Also added a "Parallel agent work (git
+  worktrees)" section to `AGENTS.md` documenting `.claude/worktrees/` (locally excluded
+  via `.git/info/exclude`) as the mechanism for running independent agents without file
+  collisions. Graph engineering stays explicitly deferred per the plan — no
+  competing autonomous loops exist on this repo yet.
+
 ## In progress
 
 - (none)
@@ -41,4 +53,5 @@ to `main`, don't let this turn into a changelog (git history already is one).
 
 ## Next steps
 
-- Phase 6: module-pair scaffold skill, git worktree note in `AGENTS.md`.
+- (none) — all planned phases complete. Revisit graph engineering only if multiple
+  long-running autonomous loops start operating on this repo concurrently.
