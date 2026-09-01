@@ -13,8 +13,6 @@ jobs:
 
   RecordScreenshotMatrixSetup:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
@@ -35,20 +33,11 @@ jobs:
       - id: matrix
         run: echo "matrix=$(cat build/record_screenshot_jobs_matrix.json | jq -c .)" >> $GITHUB_OUTPUT
 
-      - name: Remove screenshots
-        run: find . -type d -path "*/src/screenshots" -exec rm -rf {} +
-
-      - uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
-        with:
-          commit_message: Remove screenshots
-
 
 
   RecordScreenshot:
     needs: RecordScreenshotMatrixSetup
     runs-on: ${{ matrix.variants.runner }}
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -65,6 +54,9 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
 
       - uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+
+      - name: Remove screenshots
+        run: find . -type d -path "*/src/screenshots" -exec rm -rf {} +
 
       - run: ./gradlew ${{ matrix.variants.gradle_tasks }} -DIS_DATA_STUB_ENABLED=true --stacktrace
 
@@ -93,6 +85,44 @@ jobs:
         run: |
           MODULE_PATH=$(echo "${{ matrix.variants.module_path }}" | sed 's/^://' | tr ':' '/')
           find "${MODULE_PATH}/src/screenshots" -name "*.png" | xargs pngcheck -q
+
+      - name: Stage screenshots for artifact
+        run: |
+          MODULE_PATH=$(echo "${{ matrix.variants.module_path }}" | sed 's/^://' | tr ':' '/')
+          mkdir -p "artifact-screenshots/${MODULE_PATH}/src/screenshots"
+          cp -r "${MODULE_PATH}/src/screenshots/." "artifact-screenshots/${MODULE_PATH}/src/screenshots/"
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: screenshots-${{ steps.get_task.outputs.taskName }}-${{ matrix.variants.runner }}
+          path: artifact-screenshots/
+          retention-days: 1
+
+
+
+  CombineScreenshots:
+    needs: RecordScreenshot
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Remove screenshots
+        run: find . -type d -path "*/src/screenshots" -exec rm -rf {} +
+
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          pattern: screenshots-*
+          path: downloaded-screenshots
+          merge-multiple: true
+
+      - name: Apply screenshots
+        run: cp -r downloaded-screenshots/. .
 
       - run: git pull --rebase --autostash
 
