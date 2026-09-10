@@ -4,6 +4,12 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+koinCompiler {
+    // KOIN-D002 false positive on Kotlin/Native: the compile-safety checker can't
+    // resolve @Single bindings from commonMain's @ComponentScan across the test klib boundary.
+    compileSafety = false
+}
+
 kotlin {
     android.namespace = "template.core.database.room"
     sourceSets {

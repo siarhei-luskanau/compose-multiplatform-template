@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
+koinCompiler {
+    // KOIN-D002 false positive on Kotlin/Native: the compile-safety checker can't
+    // resolve @Single bindings from commonMain's @ComponentScan across the test klib boundary.
+    compileSafety = false
+}
+
 kotlin {
     android.namespace = "template.core.pref.datastore"
     sourceSets {
