@@ -55,18 +55,16 @@ Full command list per gate/target: `docs/quality-gates.md`.
    dependencies { kover(projects...) } }` block so coverage stays aggregated.
 6. Don't hand-write Koin `single<Api> { Impl() }` bindings — annotate the implementation
    class `@Single`; `diApp`'s `@ComponentScan` picks it up via KSP.
-7. Don't apply `karma.config.d/js`'s skiko wiring to the `wasmJs` target — it's `js`-only
-   (wasmJs has skiko statically linked, needs nothing).
-8. Run `ktlintFormat` before `ktlintCheck` — CI does, and an unformatted diff fails the
+7. Run `ktlintFormat` before `ktlintCheck` — CI does, and an unformatted diff fails the
    `Lint` job even if the code is otherwise correct.
-9. Before adding a test, check `docs/testing.md` for which of the five test mechanisms
+8. Before adding a test, check `docs/testing.md` for which of the six test mechanisms
    (`commonTest`, `jvmTest`/Roborazzi, `androidHostTest`, `androidTest`,
    `jsBrowserTest`/`wasmJsBrowserTest`, `iosSimulatorArm64Test`) actually fits — most new
    tests belong in `commonTest`.
-10. "Feature complete" means the app actually launched on an affected target
-    (`./gradlew :app:desktopApp:run` is the cheapest check), not just "it compiles" —
-    see Layer 3 in `docs/quality-gates.md`.
-11. One module/feature actively worked at a time (WIP=1). A large ask ("add a new
+9. "Feature complete" means the app actually launched on an affected target
+   (`./gradlew :app:desktopApp:run` is the cheapest check), not just "it compiles" —
+   see Layer 3 in `docs/quality-gates.md`.
+10. One module/feature actively worked at a time (WIP=1). A large ask ("add a new
     platform target", "add offline sync") gets broken into an ordered list in
     `docs/TASKS.md` before any code changes start.
 
@@ -112,7 +110,7 @@ Before ending a session with non-trivial changes:
 
 - `docs/architecture.md` — module dependency graph, the `*Api`/`*Impl` rule, how Koin
   wiring works, how to add a new module. Read before adding or wiring a new module.
-- `docs/testing.md` — what each of the five test mechanisms is for and when to reach for
+- `docs/testing.md` — what each of the six test mechanisms is for and when to reach for
   it. Read before adding any test.
 - `docs/quality-gates.md` — the exact commands CI runs per layer (static analysis, unit
   tests, coverage, app-actually-runs, screenshot verification) and where to look when

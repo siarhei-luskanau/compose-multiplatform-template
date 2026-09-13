@@ -1,6 +1,6 @@
 # Testing
 
-Five test mechanisms coexist in this repo. This is what each is for and when to reach
+Six test mechanisms coexist in this repo. This is what each is for and when to reach
 for it.
 
 ## `commonTest` — default choice
@@ -61,15 +61,9 @@ else belongs in `androidHostTest` or `commonTest`.
 ## `jsBrowserTest` / `wasmJsBrowserTest` — browser targets
 
 Run `commonTest` plus any `js`/`wasmJs`-specific tests in headless Chrome via Karma.
-
-- **`wasmJsBrowserTest` works with no extra setup** — skiko is statically linked into the
-  wasm binary.
-- **`jsBrowserTest` needs `karma.config.d/js`** (repo root) to load the skiko runtime
-  (`skiko.wasm`, `skiko.mjs`, `js-reexport-symbols.mjs`) and a custom Karma context page
-  that awaits skiko before starting tests — without it, `runComposeUiTest` fails with
-  `ReferenceError: org_jetbrains_skia_Surface__1nMakeRasterN32Premul is not defined`. This
-  is already wired in `composeMultiplatformConvention.gradle.kts` for the `js` target
-  only — don't copy it to `wasmJs`.
+Both `jsBrowserTest` and `wasmJsBrowserTest` work with no extra Karma setup — skiko's
+runtime resources are picked up automatically by the default `js { browser() }` /
+`wasmJs { browser() }` configuration in `composeMultiplatformConvention.gradle.kts`.
 
 `coreDatabaseRoom`'s `webMain` uses a sql.js-backed Web Worker (`worker/worker.js`,
 npm package `sql-js-worker`) as the SQLite driver for both `js` and `wasmJs`. If you

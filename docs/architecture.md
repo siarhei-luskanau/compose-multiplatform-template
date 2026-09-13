@@ -56,7 +56,7 @@ followed convention, not a Gradle-checked one.
 `diApp`'s `DiCommonModule` (`diApp/src/commonMain/kotlin/template/di/DiCommonModule.kt`)
 is a single `@Module @ComponentScan(["template.di"])` class. Implementation classes across
 every module annotate themselves with `@Single` (see `DatabaseRepositoryRoom`,
-`NetworkClientKtor`, `PrefServiceDataStore`, and the per-platform providers under
+`PrefServiceDataStore`, and the per-platform providers under
 `androidMain`/`iosMain`/`jvmMain`/`webMain`); Koin's KSP compiler plugin generates the
 bindings from these annotations. There are no hand-written `single<Api> { Impl() }`
 blocks — adding a new `*Impl` module is enough to make `diApp` pick it up, as long as the

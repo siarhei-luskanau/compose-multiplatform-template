@@ -45,25 +45,6 @@ direction for Compose Multiplatform navigation going forward.
 releases than classic Navigation — expect more frequent breaking changes on version
 bumps than a typical Dependabot dependency.
 
-## jsBrowserTest needs hand-rolled Karma + skiko wiring; wasmJs does not
-
-**Decision:** `karma.config.d/js/` (repo root) manually loads the skiko runtime
-(`skiko.wasm`, `skiko.mjs`, `js-reexport-symbols.mjs`) for Compose UI tests
-(`runComposeUiTest`) running on the `js` browser target, via a custom Karma context page
-that awaits `api.awaitSkiko` before starting tests. `composeMultiplatformConvention`
-wires this into the `js` target's `testTask` only.
-
-**Rejected alternative:** rely on JetBrains' default Karma setup. Rejected because
-official support for Compose Multiplatform web UI tests only covers `wasmJs` (skiko is
-statically linked into the wasm binary there); on `js`, tests fail with
-`ReferenceError: org_jetbrains_skia_Surface__1nMakeRasterN32Premul is not defined`
-without this wiring. The app itself doesn't need it because `ComposeViewport` awaits
-skiko's async load at runtime; `SkikoComposeUiTest` creates a `Surface` synchronously in
-tests, before that load would otherwise finish.
-
-**Do not** apply this Karma config directory to the `wasmJs` target — it's a no-op there
-at best and a maintenance trap at worst. See `docs/testing.md`.
-
 ## Kover coverage variant is `"android"`, not `"debug"`, for KMP Android modules
 
 **Decision:** the custom Kover `coverage` variant in

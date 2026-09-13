@@ -16,7 +16,7 @@ Run desktop UI tests: `./gradlew jvmTest`
 
 ### iOS
 To run the application on iPhone device/simulator:
-- Open `iosApp/iosApp.xcproject` in Xcode and run standard configuration
+- Open `app/iosApp/iosApp.xcodeproj` in Xcode and run standard configuration
 - Or use [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) for Android Studio
 - Build iOS: `./gradlew ciIos`
 - Run iOS simulator UI tests: `./gradlew iosSimulatorArm64Test`
@@ -35,7 +35,7 @@ Deploy a dir `app/webApp/build/dist/wasmJs/productionExecutable` to a web server
 
 ### Code style and linting
 - launch ktlintFormat: `./gradlew ktlintFormat`
-- launch ktlint, detekt and lint checks: `./gradlew ktlintCheck detekt lint`
+- launch ktlint, detekt and lint checks: `./gradlew ktlintCheck detekt lint checkModuleBoundaries`
 
 ### Screenshot Testing
 Record a screenshot: `./gradlew recordRoborazzi`
