@@ -40,13 +40,19 @@ Use when a test needs real Android framework classes but not a device/emulator. 
 this as `testAndroidHostTest`. The convention plugin excludes `*CommonTest*` here so the
 common suite isn't executed twice.
 
+Every module applying `composeMultiplatformConvention` gets the Robolectric wiring for
+free: `robolectric`, `junit`, `androidx.test:core` (`ApplicationProvider`) and the
+compose `ui-test-junit4` deps on `androidHostTest`, plus the `--add-opens` JVM args
+Robolectric needs on JDK 17+. Write the test with `@RunWith(AndroidJUnit4::class)` and
+name the class `*AndroidHostTest` (a `*CommonTest*` name is excluded). See
+`coreCommon`, `corePrefDatastore` and `coreDatabaseRoom` for examples.
+
 Gotcha: `BundledSQLiteDriver` (used by `coreDatabaseRoom`) resolves the Android artifact
 under Robolectric, whose native loader calls `System.loadLibrary` and fails with
-`UnsatisfiedLinkError` on a bare host JVM. `roborazziConvention.gradle.kts` works around
-this by extracting `sqlite-bundled-jvm`'s natives and pointing
+`UnsatisfiedLinkError` on a bare host JVM. `composeMultiplatformConvention.gradle.kts`
+works around this by extracting `sqlite-bundled-jvm`'s natives and pointing
 `androidx.sqlite.driver.bundled.path`/`.name` system properties at them for any
-`*AndroidHostTest*`/`*IosSimulator*` test task. If you add a module with Room tests
-outside modules that already apply `roborazziConvention`, you need this wiring too.
+`*AndroidHostTest*`/`*IosSimulator*` test task, in every module.
 
 ## `androidTest` — instrumented, real device/emulator
 

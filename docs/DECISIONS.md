@@ -98,3 +98,21 @@ shows `Main` by the time any assertion runs; there'd be no way to prove `Splash`
 rendered by the real graph rather than skipped straight to `Main`. `mainClock.autoAdvance`
 only gates frame-based work (recomposition triggered by the test's synchronization loop),
 which is enough to hold the first frame steady for the assertion.
+
+## Robolectric + sqlite-bundled natives wiring lives in `composeMultiplatformConvention`
+
+**Decision:** the generic `androidHostTest` wiring — `robolectric`, `junit` and
+`androidx.test:core` dependencies, the `--add-opens` JVM args Robolectric needs on JDK
+17+, and the `sqlite-bundled-jvm` natives extraction + `androidx.sqlite.driver.bundled.*`
+system properties for `*AndroidHostTest*`/`*IosSimulator*` test tasks — is applied by
+`composeMultiplatformConvention.gradle.kts`, so every module gets it.
+`roborazziConvention.gradle.kts` keeps only Roborazzi-specific deps and config and
+inherits the rest by applying `composeMultiplatformConvention`.
+
+**Rejected alternative:** applying `roborazziConvention` to `core/*` modules that need
+Robolectric (e.g. `coreCommon`, `corePrefDatastore`, `coreDatabaseRoom`). That would
+pull in the Roborazzi Gradle plugin, screenshot deps and auto-generated preview
+screenshot tests into modules that have no `@Preview` composables, just to get a test
+runner. The wiring is test infrastructure, not screenshot infrastructure, and it lived
+in `roborazziConvention` only because the first Robolectric tests happened to be
+screenshot tests.
