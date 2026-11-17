@@ -30,7 +30,7 @@ ksp = "2.3.13"
 ktlint = "1.8.0"
 ktor = "3.6.1"
 leakcanary = "2.14"
-robolectric = "4.17"
+robolectric = "4.18"
 roborazzi = "1.79.0"
 
 [libraries]
