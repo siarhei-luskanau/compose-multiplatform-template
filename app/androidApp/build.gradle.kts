@@ -72,8 +72,6 @@ kotlin {
 
 dependencies {
     androidTestImplementation(kotlin("test-junit"))
-    androidTestImplementation(libs.androidx.uitest.junit4)
-    debugImplementation(libs.androidx.uitest.testManifest)
     debugImplementation(libs.leakcanary.android)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.datastore.core.okio)

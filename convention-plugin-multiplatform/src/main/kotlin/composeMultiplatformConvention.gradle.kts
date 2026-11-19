@@ -116,8 +116,6 @@ kotlin {
         getByName("androidHostTest") {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(libs.androidx.uitest.junit4)
-                implementation(libs.androidx.uitest.testManifest)
                 implementation(libs.junit)
                 implementation(libs.robolectric)
             }

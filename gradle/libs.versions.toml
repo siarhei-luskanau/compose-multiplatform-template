@@ -4,7 +4,6 @@ androidx-activity = "1.13.0"
 androidx-datastore = "1.3.0"
 androidx-room3 = "3.0.3"
 androidx-sqlite = "2.7.1"
-androidx-uiTest = "1.13.0"
 build-android-compileSdk = "37"
 build-android-compileSdkMinor = "2"
 build-android-minSdk = "30"
@@ -44,8 +43,6 @@ androidx-sqlite = { module = "androidx.sqlite:sqlite", version.ref = "androidx-s
 androidx-sqlite-async = { module = "androidx.sqlite:sqlite-async", version.ref = "androidx-sqlite" }
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "androidx-sqlite" }
 androidx-sqlite-web = { module = "androidx.sqlite:sqlite-web", version.ref = "androidx-sqlite" }
-androidx-uitest-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
-androidx-uitest-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
 composable-preview-scanner-android = { module = "io.github.sergio-sastre.ComposablePreviewScanner:android", version.ref = "composable-preview-scanner" }
 jetbrains-compose-animation = { module = "org.jetbrains.compose.animation:animation", version.ref = "compose-multiplatform" }
 jetbrains-compose-animation-graphics = { module = "org.jetbrains.compose.animation:animation-graphics", version.ref = "compose-multiplatform" }
